@@ -105,7 +105,7 @@ m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
 
 res = m.inference(
     data_in="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav",
-    language="zh",
+    language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
     **kwargs,
 )
@@ -131,7 +131,7 @@ model = AutoModel(model=model_dir,
 res = model.generate(
     input=input_file,
     cache={},
-    language="zh",
+    language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
     batch_size_s=0, 
 )
@@ -147,7 +147,7 @@ model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
 res = model.generate(
     input=input_file,
     cache={},
-    language="zh",
+    language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
     batch_size=64, 
 )
