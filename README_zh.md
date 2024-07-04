@@ -38,7 +38,8 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 
 <a name="最新动态"></a>
 # 最新动态 🔥
-- 2024/7： SenseVoice-Small多语言音频理解模型开源，支持中、粤、英、日、韩语的多语言语音识别，情感识别和事件检测能力。
+- 2024/7: SenseVoice-Small多语言音频理解模型开源，支持中、粤、英、日、韩语的多语言语音识别，情感识别和事件检测能力。
+- 2024/7: CosyVoice致力于自然语音生成，支持多语言、音色和情感控制。[CosyVoice repo](https://https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice 在线体验](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
 
 <a name="Benchmarks"></a>
 # Benchmarks 📝
