@@ -43,7 +43,7 @@ Model Zoo:
 - 2024/7: The CosyVoice for natural speech generation with multi-language, timbre, and emotion control. [CosyVoice repo](https://https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice space](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) is a fundamental speech recognition toolkit that offers a variety of features, including speech recognition (ASR), Voice Activity Detection (VAD), Punctuation Restoration, Language Models, Speaker Verification, Speaker Diarization and multi-talker ASR.
 
-- <a name="Benchmarks"></a>
+<a name="Benchmarks"></a>
 # Benchmarks 📝
 
 ## Multilingual Speech Recognition
