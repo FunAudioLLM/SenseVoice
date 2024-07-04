@@ -106,7 +106,7 @@ m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
 res = m.inference(
     data_in="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav",
     language="zh",
-    text_norm="woitn",
+    use_itn=False,
     **kwargs,
 )
 
@@ -132,7 +132,7 @@ res = model.generate(
     input=input_file,
     cache={},
     language="zh",
-    text_norm="woitn",
+    use_itn=False,
     batch_size_s=0, 
 )
 
@@ -148,7 +148,7 @@ res = model.generate(
     input=input_file,
     cache={},
     language="zh",
-    text_norm="woitn",
+    use_itn=False,
     batch_size=64, 
 )
 ```
