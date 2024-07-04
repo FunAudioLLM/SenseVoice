@@ -22,7 +22,7 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 ｜<a href="#联系我们"> 联系我们 </a>
 </h4>
 
-模型仓库：中国大陆用户推荐 [modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall)，海外用户推荐 [huggingface]()
+模型仓库：中国大陆用户推荐 [modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall)，海外用户推荐 [huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)
 </div>
 
 <a name="核心功能"></a>
