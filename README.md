@@ -38,7 +38,7 @@ Model Zoo:
 - **Service Deployment:** Offer service deployment pipeline,  supporting multi-concurrent requests, with client-side languages including Python, C++, HTML, Java, and C#, among others.
 
 <a name="What's News"></a>
-# What's News 🔥
+# What's New 🔥
 - 2024/7: The [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) voice understanding model is open-sourced, which offers high-precision multilingual speech recognition, emotion recognition, and audio event detection capabilities for Mandarin, Cantonese, English, Japanese, and Korean and leads to exceptionally low inference latency.  
 - 2024/7: The CosyVoice for natural speech generation with multi-language, timbre, and emotion control. CosyVoice excels in multi-lingual voice generation, zero-shot voice generation, cross-lingual voice cloning, and instruction-following capabilities. [CosyVoice repo](https://https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice space](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) is a fundamental speech recognition toolkit that offers a variety of features, including speech recognition (ASR), Voice Activity Detection (VAD), Punctuation Restoration, Language Models, Speaker Verification, Speaker Diarization and multi-talker ASR.
@@ -47,7 +47,7 @@ Model Zoo:
 # Benchmarks 📝
 
 ## Multilingual Speech Recognition
-We compared the performance of multilingual speech recognition between SenseVoice and Whisper on open-source benchmark datasets, including AISHELL-1, AISHELL-2, Wenetspeech, LibriSpeech, and Common Voice. n terms of Chinese and Cantonese recognition, the SenseVoice-Small model has advantages.
+We compared the performance of multilingual speech recognition between SenseVoice and Whisper on open-source benchmark datasets, including AISHELL-1, AISHELL-2, Wenetspeech, LibriSpeech, and Common Voice. In terms of Chinese and Cantonese recognition, the SenseVoice-Small model has advantages.
 
 <div align="center">  
 <img src="image/asr_results1.png" width="400" /><img src="image/asr_results2.png" width="400" />
@@ -77,7 +77,7 @@ Although trained exclusively on speech data, SenseVoice can still function as a 
 
 ## Computational  Efficiency
 
-The SenseVoice-Small model  non-autoregressive end-to-end architecture, resulting in extremely low inference latency. With a similar number of parameters to the Whisper-Small model, it infers more than 5 times faster than Whisper-Small and 15 times faster than Whisper-Large. 
+The SenseVoice-Small model deploys a non-autoregressive end-to-end architecture, resulting in extremely low inference latency. With a similar number of parameters to the Whisper-Small model, it infers more than 5 times faster than Whisper-Small and 15 times faster than Whisper-Large. 
 
 <div align="center">  
 <img src="image/inference.png" width="1000" />
@@ -154,7 +154,7 @@ res = model.generate(
 )
 ```
 
-For more usage, please ref to [docs](https://github.com/modelscope/FunASR/blob/main/docs/tutorial/README.md)
+For more usage, please refer to [docs](https://github.com/modelscope/FunASR/blob/main/docs/tutorial/README.md)
 
 
 
