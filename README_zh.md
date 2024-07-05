@@ -50,7 +50,7 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 我们在开源基准数据集（包括 AISHELL-1、AISHELL-2、Wenetspeech、Librispeech和Common Voice）上比较了SenseVoice与Whisper的多语言语音识别性能和推理效率。在中文和粤语识别效果上，SenseVoice-Small模型具有明显的效果优势。
 
 <div align="center">  
-<img src="image/asr_results1.png" width="500" /><img src="image/asr_results2.png" width="500" />
+<img src="image/asr_results1.png" width="400" /><img src="image/asr_results2.png" width="400" />
 </div>
 
 ## 情感识别
