@@ -50,7 +50,7 @@ Model Zoo:
 We compared the performance of multilingual speech recognition between SenseVoice and Whisper on open-source benchmark datasets, including AISHELL-1, AISHELL-2, Wenetspeech, LibriSpeech, and Common Voice. n terms of Chinese and Cantonese recognition, the SenseVoice-Small model has advantages.
 
 <div align="center">  
-<img src="image/asr_results.png" width="1000" />
+<img src="image/asr_results1.png" width="500" /><img src="image/asr_results2.png" width="500" />
 </div>
 
 ## Speech Emotion Recognition
