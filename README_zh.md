@@ -216,6 +216,11 @@ python webui.py
 
 # 联系我们
 
+如果您在使用中遇到问题，可以直接在github页面提Issues。欢迎语音兴趣爱好者扫描以下的钉钉群二维码加入社区群，进行交流和讨论。
+
+|                           FunAudioLLM                            |                          FunASR                          |
+|:----------------------------------------------------------------:|:--------------------------------------------------------:|
+| <div align="left"><img src="image/dingding_sv.png" width="250"/> | <img src="image/dingding_funasr.png" width="250"/></div> |
 
 
 

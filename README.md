@@ -12,7 +12,7 @@ SenseVoice is a speech foundation model with multiple speech understanding capab
 <div align="center">  
 <h4>
 <a href="https://www.modelscope.cn/studios/iic/SenseVoice"> Online Demo </a>
-｜<a href="# "> Homepage </a>
+｜<a href="https://fun-audio-llm.github.io/"> Homepage </a>
 ｜<a href="#What's News"> What's News </a>
 ｜<a href="#Benchmarks"> Benchmarks </a>
 ｜<a href="#Install"> Install </a>
@@ -215,5 +215,12 @@ python webui.py
 
 <a name="Community"></a>
 # Community
+If you encounter problems in use, you can directly raise Issues on the github page.
+
+You can also scan the following DingTalk group QR code to join the community group for communication and discussion.
+
+|                           FunAudioLLM                            |                          FunASR                          |
+|:----------------------------------------------------------------:|:--------------------------------------------------------:|
+| <div align="left"><img src="image/dingding_sv.png" width="250"/> | <img src="image/dingding_funasr.png" width="250"/></div> |
 
 
