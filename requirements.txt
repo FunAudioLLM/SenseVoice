@@ -5,3 +5,5 @@ modelscope
 huggingface
 huggingface_hub
 funasr
+
+numpy<=1.26.4
