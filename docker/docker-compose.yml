@@ -1,0 +1,16 @@
+# @Author: Bi Ying
+# @Date:   2024-07-10 21:10:22
+# @Last Modified by:   Bi Ying
+# @Last Modified time: 2024-07-10 21:20:22
+version: '3.8'
+
+services:
+  sensevoice-openai-server:
+    image: sensevoice-openai-server
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.cache:/root/.cache
+    environment:
+      TMP_DIR: /app/tmp
