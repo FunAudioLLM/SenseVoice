@@ -4,6 +4,7 @@
 #  MIT License  (https://opensource.org/licenses/MIT)
 
 from funasr import AutoModel
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
 input_file = (
@@ -22,4 +23,6 @@ res = model.generate(
     use_itn=False,
 )
 
-print(res)
+text = rich_transcription_postprocess(res[0]["text"])
+
+print(text)

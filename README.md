@@ -118,6 +118,7 @@ print(res)
 
 ```python
 from funasr import AutoModel
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
 input_file = (
@@ -137,7 +138,9 @@ res = model.generate(
     batch_size_s=0, 
 )
 
-print(res)
+text = rich_transcription_postprocess(res[0]["text"])
+
+print(text)
 ```
 
 The funasr version has integrated the VAD (Voice Activity Detection) model and supports audio input of any duration, with `batch_size_s` in seconds.
