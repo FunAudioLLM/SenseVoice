@@ -213,7 +213,7 @@ html_content = """
 	<h2 style="font-size: 22px;margin-left: 0px;">Repo</h2>
 	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/FunAudioLLM/SenseVoice" target="_blank">SenseVoice</a>: multilingual speech understanding model</p>
 	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/modelscope/FunASR" target="_blank">FunASR</a>: fundamental speech recognition toolkit</p>
-	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/modelscope/CosyVoice" target="_blank">CosyVoice</a>: high-quality multilingual TTS model</p>
+	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/FunAudioLLM/CosyVoice" target="_blank">CosyVoice</a>: high-quality multilingual TTS model</p>
 </div>
 """
 
