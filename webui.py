@@ -203,7 +203,6 @@ audio_examples = [
 
 
 
-
 html_content = """
 <div>
     <h2 style="font-size: 22px;margin-left: 0px;">Voice Understanding Model: SenseVoice-Small</h2>
@@ -227,8 +226,6 @@ def launch():
 				audio_inputs = gr.Audio(label="Upload audio or use the microphone")
 				
 				with gr.Accordion("Configuration"):
-					# task_inputs = gr.Radio(choices=["Speech Recognition", "Rich Text Transcription"],
-					# 					   value="Speech Recognition", label="Task")
 					language_inputs = gr.Dropdown(choices=["auto", "zh", "en", "yue", "ja", "ko", "nospeech"],
 												  value="auto",
 												  label="Language")
@@ -237,8 +234,7 @@ def launch():
 			gr.Examples(examples=audio_examples, inputs=[audio_inputs, language_inputs], examples_per_page=20)
 		
 		fn_button.click(model_inference, inputs=[audio_inputs, language_inputs], outputs=text_outputs)
-		# with gr.Accordion("More examples"):
-		# 	gr.HTML(centered_table_html)
+
 	demo.launch()
 
 
