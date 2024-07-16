@@ -164,13 +164,13 @@ m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
 
 
 res = m.inference(
-    data_in="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav",
+    data_in=f"{kwargs['model_path']}/example/en.mp3",
     language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
     **kwargs,
 )
 
-text = rich_transcription_postprocess(res[0]["text"])
+text = rich_transcription_postprocess(res[0][0]["text"])
 print(text)
 ```
 
