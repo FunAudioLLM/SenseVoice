@@ -3,5 +3,5 @@ torchaudio
 modelscope
 huggingface
 huggingface_hub
-funasr>=1.1.0
+funasr>=1.1.1
 numpy<=1.26.4
