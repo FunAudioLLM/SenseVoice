@@ -178,7 +178,8 @@ print(text)
 
 Undo
 
-### 导出与测试
+### 导出与测试（*进行中*）
+
 
 ```python
 # pip3 install -U funasr-onnx

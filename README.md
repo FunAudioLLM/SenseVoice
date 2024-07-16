@@ -170,7 +170,7 @@ text = rich_transcription_postprocess(res[0]["text"])
 print(text)
 ```
 
-### Export and Test
+### Export and Test (*On going*)
 
 ```python
 # pip3 install -U funasr-onnx
