@@ -95,7 +95,60 @@ pip install -r requirements.txt
 
 ## 推理
 
+
+
+### 使用funasr推理
+
+支持任意格式音频输入，支持任意时长输入
+
+```python
+from funasr import AutoModel
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
+
+model_dir = "iic/SenseVoiceSmall"
+
+
+model = AutoModel(
+    model=model_dir,
+    vad_model="fsmn-vad",
+    vad_kwargs={"max_single_segment_time": 30000},
+    device="cpu",
+)
+
+# en
+res = model.generate(
+    input=f"{model.model_path}/example/en.mp3",
+    cache={},
+    language="auto",  # "zn", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=True,
+    batch_size_s=60,
+    merge_vad=True,  #
+    merge_length_s=15,
+)
+text = rich_transcription_postprocess(res[0]["text"])
+print(text)
+```
+
+funasr版本已经集成了vad模型，支持任意时长音频输入，`batch_size_s`单位为秒。
+如果输入均为短音频（小于30s），并且需要批量化推理，为了加快推理效率，可以移除vad模型，并设置`batch_size`
+
+```python
+model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
+
+res = model.generate(
+    input=input_file,
+    cache={},
+    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=False,
+    batch_size=64, 
+)
+```
+
+更多详细用法，请参考 [文档](https://github.com/modelscope/FunASR/blob/main/docs/tutorial/README.md)
+
 ### 直接推理
+
+支持任意格式音频输入，输入音频时长限制在30s以下
 
 ```python
 from model import SenseVoiceSmall
@@ -113,52 +166,6 @@ res = m.inference(
 
 print(res)
 ```
-
-### 使用funasr推理
-
-```python
-from funasr import AutoModel
-from funasr.utils.postprocess_utils import rich_transcription_postprocess
-
-model_dir = "iic/SenseVoiceSmall"
-input_file = (
-    "https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav"
-)
-
-model = AutoModel(model=model_dir,
-                  vad_model="fsmn-vad",
-                  vad_kwargs={"max_single_segment_time": 30000},
-                  trust_remote_code=True, device="cuda:0")
-
-res = model.generate(
-    input=input_file,
-    cache={},
-    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
-    batch_size_s=0, 
-)
-
-text = rich_transcription_postprocess(res[0]["text"])
-
-print(text)
-```
-
-funasr版本已经集成了vad模型，支持任意时长音频输入，`batch_size_s`单位为秒。
-如果输入均为短音频，并且需要批量化推理，为了加快推理效率，可以移除vad模型，并设置`batch_size`
-
-```python
-model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
-
-res = model.generate(
-    input=input_file,
-    cache={},
-    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
-    batch_size=64, 
-)
-```
-
-更多详细用法，请参考 [文档](https://github.com/modelscope/FunASR/blob/main/docs/tutorial/README.md)
 
 ## 服务部署
 
