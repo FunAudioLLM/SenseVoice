@@ -128,18 +128,23 @@ res = model.generate(
 text = rich_transcription_postprocess(res[0]["text"])
 print(text)
 ```
+参数说明：
+- `model_dir`：模型名称，或本地磁盘中的模型路径。
+- `max_single_segment_time`: 表示`vad_model`最大切割音频时长, 单位是毫秒ms。
+- `use_itn`：输出结果中是否包含标点与逆文本正则化。
+- `batch_size_s` 表示采用动态batch，batch中总音频时长，单位为秒s。
+- `merge_vad`：是否将 vad 模型切割的短音频碎片合成，合并后长度为`merge_length_s`，单位为秒s。
 
-funasr版本已经集成了vad模型，支持任意时长音频输入，`batch_size_s`单位为秒。
 如果输入均为短音频（小于30s），并且需要批量化推理，为了加快推理效率，可以移除vad模型，并设置`batch_size`
 
 ```python
 model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
 
 res = model.generate(
-    input=input_file,
+    input=f"{model.model_path}/example/en.mp3",
     cache={},
     language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
+    use_itn=True,
     batch_size=64, 
 )
 ```
@@ -152,6 +157,7 @@ res = model.generate(
 
 ```python
 from model import SenseVoiceSmall
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
 m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
@@ -164,7 +170,8 @@ res = m.inference(
     **kwargs,
 )
 
-print(res)
+text = rich_transcription_postprocess(res[0]["text"])
+print(text)
 ```
 
 ## 服务部署

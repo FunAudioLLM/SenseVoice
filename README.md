@@ -95,43 +95,49 @@ pip install -r requirements.txt
 
 ## Inference
 
-
-### Method 2
+Supports input of audio in any format and of any duration.
 
 ```python
 from funasr import AutoModel
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
-input_file = (
-    "https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav"
+
+
+model = AutoModel(
+    model=model_dir,
+    vad_model="fsmn-vad",
+    vad_kwargs={"max_single_segment_time": 30000},
+    device="cpu",
 )
 
-model = AutoModel(model=model_dir,
-                  vad_model="fsmn-vad",
-                  vad_kwargs={"max_single_segment_time": 30000},
-                  trust_remote_code=True, device="cuda:0")
-
+# en
 res = model.generate(
-    input=input_file,
+    input=f"{model.model_path}/example/en.mp3",
     cache={},
-    language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
-    batch_size_s=0, 
+    language="auto",  # "zn", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=True,
+    batch_size_s=60,
+    merge_vad=True,  #
+    merge_length_s=15,
 )
-
 text = rich_transcription_postprocess(res[0]["text"])
-
 print(text)
 ```
 
-The funasr version has integrated the VAD (Voice Activity Detection) model and supports audio input of any duration, with `batch_size_s` in seconds.
-If all inputs are short audios, and batch inference is needed to speed up inference efficiency, the VAD model can be removed, and `batch_size` can be set accordingly.
+Parameter Descriptions:
+- `model_dir`: The name of the model, or the model's path on the local disk.
+- `max_single_segment_time`: The maximum length of audio segments that the `vad_model` can cut, measured in milliseconds (ms).
+- `use_itn`: Indicates whether the output should include punctuation and inverse text normalization.
+- `batch_size_s`: Represents a dynamic batch size where the total duration of the audio in the batch is measured in seconds (s).
+- `merge_vad`: Whether to concatenate short audio fragments cut by the vad model, with the merged length being `merge_length_s`, measured in seconds (s).
+
+If all inputs are short audios (<30s), and batch inference is needed to speed up inference efficiency, the VAD model can be removed, and `batch_size` can be set accordingly.
 ```python
 model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
 
 res = model.generate(
-    input=input_file,
+    input=f"{model.model_path}/example/en.mp3",
     cache={},
     language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
@@ -141,10 +147,13 @@ res = model.generate(
 
 For more usage, please refer to [docs](https://github.com/modelscope/FunASR/blob/main/docs/tutorial/README.md)
 
-### Method 1
+### Inference directly
+
+Supports input of audio in any format, with an input duration limit of 30 seconds or less.
 
 ```python
 from model import SenseVoiceSmall
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
 m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
@@ -152,12 +161,13 @@ m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
 
 res = m.inference(
     data_in="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav",
-    language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
+    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
     **kwargs,
 )
 
-print(res)
+text = rich_transcription_postprocess(res[0]["text"])
+print(text)
 ```
 
 ### Export and Test

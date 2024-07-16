@@ -168,7 +168,7 @@ def model_inference(input_wav, language, fs=16000):
 						  cache={},
 						  language=language,
 						  use_itn=True,
-						  batch_size_s=0, merge_vad=merge_vad)
+						  batch_size_s=60, merge_vad=merge_vad)
 	
 	print(text)
 	text = text[0]["text"]
