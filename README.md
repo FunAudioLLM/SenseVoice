@@ -11,8 +11,7 @@ SenseVoice is a speech foundation model with multiple speech understanding capab
 
 <div align="center">  
 <h4>
-<a href="https://www.modelscope.cn/studios/iic/SenseVoice"> Online Demo </a>
-｜<a href="https://fun-audio-llm.github.io/"> Homepage </a>
+<a href="https://fun-audio-llm.github.io/"> Homepage </a>
 ｜<a href="#What's News"> What's News </a>
 ｜<a href="#Benchmarks"> Benchmarks </a>
 ｜<a href="#Install"> Install </a>
@@ -22,6 +21,10 @@ SenseVoice is a speech foundation model with multiple speech understanding capab
 
 Model Zoo:
 [modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall), [huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)
+
+Online Demo:
+[modelscope demo](https://www.modelscope.cn/studios/iic/SenseVoice), [huggingface space](https://huggingface.co/spaces/FunAudioLLM/SenseVoice)
+
 
 </div>
 
@@ -162,7 +165,7 @@ from model import SenseVoiceSmall
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
-m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
+m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir, device="cuda:0")
 
 
 res = m.inference(
