@@ -10,8 +10,7 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 [//]: # (<div align="center"><img src="image/sensevoice2.png" width="700"/> </div>)
  
 <h4>
-<a href="https://www.modelscope.cn/studios/iic/SenseVoice"> 在线体验 </a>
-｜<a href="#What's New"> 文档主页 </a>
+<a href="#What's New"> 文档主页 </a>
 ｜<a href="#核心功能"> 核心功能 </a>
 </h4>
 <h4>
