@@ -132,6 +132,9 @@ print(text)
 ```
 参数说明：
 - `model_dir`：模型名称，或本地磁盘中的模型路径。
+- `trust_remote_code`：
+  - `True`表示model代码实现从`remote_code`处加载，`remote_code`指定`model`具体代码的位置（例如，当前目录下的`model.py`），支持绝对路径与相对路径，以及网络url。
+  - `False`表示，model代码实现为 [FunASR](https://github.com/modelscope/FunASR) 内部集成版本，此时修改当前目录下的`model.py`不会生效，因为加载的是funasr内部版本，模型代码[点击查看](https://github.com/modelscope/FunASR/tree/main/funasr/models/sense_voice)。
 - `max_single_segment_time`: 表示`vad_model`最大切割音频时长, 单位是毫秒ms。
 - `use_itn`：输出结果中是否包含标点与逆文本正则化。
 - `batch_size_s` 表示采用动态batch，batch中总音频时长，单位为秒s。
