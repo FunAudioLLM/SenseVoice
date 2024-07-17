@@ -1,4 +1,4 @@
-([简体中文](./README_zh.md)|English)
+([简体中文](./README_zh.md)|English|[日本語](./README_ja.md))
 
 
 # Introduction
