@@ -30,7 +30,7 @@ Online Demo:
 
 
 <a name="Highligts"></a>
-# Highligts 🎯
+# Highlights 🎯
 **SenseVoice** focuses on high-accuracy multilingual speech recognition, speech emotion recognition, and audio event detection.
 - **Multilingual Speech Recognition:** Trained with over 400,000 hours of data, supporting more than 50 languages, the recognition performance surpasses that of the Whisper model.
 - **Rich transcribe:** 
