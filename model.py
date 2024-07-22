@@ -858,7 +858,7 @@ class SenseVoiceSmall(nn.Module):
 
         # c. Passed the encoder result and the beam search
         ctc_logits = self.ctc.log_softmax(encoder_out)
-        if kwargs.get("allow_emo_unk", False):
+        if kwargs.get("ban_emo_unk", False):
             ctc_logits[:, :, self.emo_dict["unk"]] = -float("inf")
 
         results = []
