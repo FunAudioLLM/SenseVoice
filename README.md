@@ -42,6 +42,7 @@ Online Demo:
 
 <a name="What's News"></a>
 # What's New 🔥
+- 2024/7: Added Export Features for [ONNX](./demo_onnx.py) and [libtorch](./demo_libtorch.py), as well as Python Version Runtimes: [funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/), [funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
 - 2024/7: The [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) voice understanding model is open-sourced, which offers high-precision multilingual speech recognition, emotion recognition, and audio event detection capabilities for Mandarin, Cantonese, English, Japanese, and Korean and leads to exceptionally low inference latency.  
 - 2024/7: The CosyVoice for natural speech generation with multi-language, timbre, and emotion control. CosyVoice excels in multi-lingual voice generation, zero-shot voice generation, cross-lingual voice cloning, and instruction-following capabilities. [CosyVoice repo](https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice space](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) is a fundamental speech recognition toolkit that offers a variety of features, including speech recognition (ASR), Voice Activity Detection (VAD), Punctuation Restoration, Language Models, Speaker Verification, Speaker Diarization and multi-talker ASR.
@@ -180,20 +181,47 @@ text = rich_transcription_postprocess(res[0][0]["text"])
 print(text)
 ```
 
-### Export and Test (*On going*)
+### Export and Test
+<details><summary>ONNX and Libtorch Export</summary>
 
+#### ONNX
 ```python
-# pip3 install -U funasr-onnx
+# pip3 install -U funasr funasr-onnx
+from pathlib import Path
 from funasr_onnx import SenseVoiceSmall
+from funasr_onnx.utils.postprocess_utils import rich_transcription_postprocess
 
-model_dir = "iic/SenseVoiceCTC"
-model = SenseVoiceSmall(model_dir, batch_size=1, quantize=True)
 
-wav_path = [f'~/.cache/modelscope/hub/{model_dir}/example/asr_example.wav']
+model_dir = "iic/SenseVoiceSmall"
 
-result = model(wav_path)
-print(result)
+model = SenseVoiceSmall(model_dir, batch_size=10, quantize=True)
+
+# inference
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
+
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess(i) for i in res])
 ```
+Note: ONNX model is exported to the original model directory.
+
+#### Libtorch
+```python
+from pathlib import Path
+from funasr_torch import SenseVoiceSmall
+from funasr_torch.utils.postprocess_utils import rich_transcription_postprocess
+
+
+model_dir = "iic/SenseVoiceSmall"
+
+model = SenseVoiceSmall(model_dir, batch_size=10, device="cuda:0")
+
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
+
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess(i) for i in res])
+```
+Note: Libtorch model is exported to the original model directory.
+<details>
 
 ## Service
 
@@ -234,6 +262,9 @@ python webui.py
 ```
 
 <div align="center"><img src="image/webui.png" width="700"/> </div>
+
+
+
 
 <a name="Community"></a>
 # Community

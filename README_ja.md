@@ -41,6 +41,7 @@ SenseVoiceは、音声認識（ASR）、言語識別（LID）、音声感情認�
 
 <a name="最新动态"></a>
 # 最新情報 🔥
+- 2024/7：新しく[ONNX](./demo_onnx.py)と[libtorch](./demo_libtorch.py)のエクスポート機能を追加し、Pythonバージョンのランタイム：[funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/)、[funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)も提供開始。
 - 2024/7: [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) 多言語音声理解モデルがオープンソース化されました。中国語、広東語、英語、日本語、韓国語の多言語音声認識、感情認識、およびイベント検出能力をサポートし、非常に低い推論遅延を実現しています。
 - 2024/7: CosyVoiceは自然な音声生成に取り組んでおり、多言語、音色、感情制御をサポートします。多言語音声生成、ゼロショット音声生成、クロスランゲージ音声クローン、および指示に従う能力に優れています。[CosyVoice repo](https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice オンライン体験](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) は、音声認識（ASR）、音声活動検出（VAD）、句読点復元、言語モデル、話者検証、話者分離、およびマルチトーカーASRなどの機能を提供する基本的な音声認識ツールキットです。
@@ -184,20 +185,48 @@ print(text)
 
 未完了
 
-### エクスポートとテスト（*進行中*）
+### エクスポートとテスト
+<details><summary>ONNXとLibtorchのエクスポート</summary>
 
+#### ONNX
 ```python
-# pip3 install -U funasr-onnx
+# pip3 install -U funasr funasr-onnx
+from pathlib import Path
 from funasr_onnx import SenseVoiceSmall
+from funasr_onnx.utils.postprocess_utils import rich_transcription_postprocess
+
 
 model_dir = "iic/SenseVoiceSmall"
-model = SenseVoiceSmall(model_dir, batch_size=1, quantize=True)
 
-wav_path = [f'~/.cache/modelscope/hub/{model_dir}/example/asr_example.wav']
+model = SenseVoiceSmall(model_dir, batch_size=10, quantize=True)
 
-result = model(wav_path)
-print(result)
+# inference
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
+
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess(i) for i in res])
 ```
+備考：ONNXモデルは元のモデルディレクトリにエクスポートされます。
+
+#### Libtorch
+```python
+from pathlib import Path
+from funasr_torch import SenseVoiceSmall
+from funasr_torch.utils.postprocess_utils import rich_transcription_postprocess
+
+
+model_dir = "iic/SenseVoiceSmall"
+
+model = SenseVoiceSmall(model_dir, batch_size=10, device="cuda:0")
+
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
+
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess(i) for i in res])
+```
+備考：Libtorchモデルは元のモデルディレクトリにエクスポートされます。
+
+<details>
 
 ### 展開
 

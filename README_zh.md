@@ -41,6 +41,7 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 
 <a name="最新动态"></a>
 # 最新动态 🔥
+- 2024/7：新增加导出 [ONNX](./demo_onnx.py) 与 [libtorch](./demo_libtorch.py) 功能，以及 python 版本 runtime：[funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/)，[funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
 - 2024/7: [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) 多语言音频理解模型开源，支持中、粤、英、日、韩语的多语言语音识别，情感识别和事件检测能力，具有极低的推理延迟。。
 - 2024/7: CosyVoice致力于自然语音生成，支持多语言、音色和情感控制，擅长多语言语音生成、零样本语音生成、跨语言语音克隆以及遵循指令的能力。[CosyVoice repo](https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice 在线体验](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) 是一个基础语音识别工具包，提供多种功能，包括语音识别（ASR）、语音端点检测（VAD）、标点恢复、语言模型、说话人验证、说话人分离和多人对话语音识别等。
@@ -188,21 +189,48 @@ print(text)
 
 Undo
 
-### 导出与测试（*进行中*）
+### 导出与测试
+<details><summary>ONNX 与 Libtorch 导出</summary>
 
-
+#### ONNX
 ```python
-# pip3 install -U funasr-onnx
+# pip3 install -U funasr funasr-onnx
+from pathlib import Path
 from funasr_onnx import SenseVoiceSmall
+from funasr_onnx.utils.postprocess_utils import rich_transcription_postprocess
+
 
 model_dir = "iic/SenseVoiceSmall"
-model = SenseVoiceSmall(model_dir, batch_size=1, quantize=True)
 
-wav_path = [f'~/.cache/modelscope/hub/{model_dir}/example/asr_example.wav']
+model = SenseVoiceSmall(model_dir, batch_size=10, quantize=True)
 
-result = model(wav_path)
-print(result)
+# inference
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
+
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess(i) for i in res])
 ```
+备注：ONNX模型导出到原模型目录中
+
+#### Libtorch
+```python
+from pathlib import Path
+from funasr_torch import SenseVoiceSmall
+from funasr_torch.utils.postprocess_utils import rich_transcription_postprocess
+
+
+model_dir = "iic/SenseVoiceSmall"
+
+model = SenseVoiceSmall(model_dir, batch_size=10, device="cuda:0")
+
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
+
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess(i) for i in res])
+```
+备注：Libtorch模型导出到原模型目录中
+
+</details>
 
 ### 部署
 
