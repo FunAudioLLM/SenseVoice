@@ -1,6 +1,6 @@
 # SenseVoice
 
-「简体中文」|「[English](./README.md)」 
+「简体中文」|「[English](./README.md)」|「[日本語](./README_ja.md)」
 
 SenseVoice是具有音频理解能力的音频基础模型，包括语音识别（ASR）、语种识别（LID）、语音情感识别（SER）和声学事件分类（AEC）或声学事件检测（AED）。本项目提供SenseVoice模型的介绍以及在多个任务测试集上的benchmark，以及体验模型所需的环境安装的与推理方式。
 
@@ -10,8 +10,7 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 [//]: # (<div align="center"><img src="image/sensevoice2.png" width="700"/> </div>)
  
 <h4>
-<a href="https://www.modelscope.cn/studios/iic/SenseVoice"> 在线体验 </a>
-｜<a href="#What's New"> 文档主页 </a>
+<a href="#What's New"> 文档主页 </a>
 ｜<a href="#核心功能"> 核心功能 </a>
 </h4>
 <h4>
@@ -22,7 +21,11 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 ｜<a href="#联系我们"> 联系我们 </a>
 </h4>
 
-模型仓库：中国大陆用户推荐 [modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall)，海外用户推荐 [huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)
+模型仓库：[modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall)，[huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)
+
+在线体验：
+[modelscope demo](https://www.modelscope.cn/studios/iic/SenseVoice), [huggingface space](https://huggingface.co/spaces/FunAudioLLM/SenseVoice)
+
 </div>
 
 <a name="核心功能"></a>
@@ -95,76 +98,97 @@ pip install -r requirements.txt
 
 ## 推理
 
-### 直接推理
 
-```python
-from model import SenseVoiceSmall
-
-model_dir = "iic/SenseVoiceSmall"
-m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
-
-
-res = m.inference(
-    data_in="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav",
-    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
-    **kwargs,
-)
-
-print(res)
-```
 
 ### 使用funasr推理
+
+支持任意格式音频输入，支持任意时长输入
 
 ```python
 from funasr import AutoModel
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
-input_file = (
-    "https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav"
+
+
+model = AutoModel(
+    model=model_dir,
+    trust_remote_code=True,
+    remote_code="./model.py",  
+    vad_model="fsmn-vad",
+    vad_kwargs={"max_single_segment_time": 30000},
+    device="cuda:0",
 )
 
-model = AutoModel(model=model_dir,
-                  vad_model="fsmn-vad",
-                  vad_kwargs={"max_single_segment_time": 30000},
-                  trust_remote_code=True, device="cuda:0")
-
+# en
 res = model.generate(
-    input=input_file,
+    input=f"{model.model_path}/example/en.mp3",
     cache={},
-    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
-    batch_size_s=0, 
+    language="auto",  # "zn", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=True,
+    batch_size_s=60,
+    merge_vad=True,  #
+    merge_length_s=15,
 )
-
 text = rich_transcription_postprocess(res[0]["text"])
-
 print(text)
 ```
+参数说明：
+- `model_dir`：模型名称，或本地磁盘中的模型路径。
+- `trust_remote_code`：
+  - `True`表示model代码实现从`remote_code`处加载，`remote_code`指定`model`具体代码的位置（例如，当前目录下的`model.py`），支持绝对路径与相对路径，以及网络url。
+  - `False`表示，model代码实现为 [FunASR](https://github.com/modelscope/FunASR) 内部集成版本，此时修改当前目录下的`model.py`不会生效，因为加载的是funasr内部版本，模型代码[点击查看](https://github.com/modelscope/FunASR/tree/main/funasr/models/sense_voice)。
+- `vad_model`：表示开启VAD，VAD的作用是将长音频切割成短音频，此时推理耗时包括了VAD与SenseVoice总耗时，为链路耗时，如果需要单独测试SenseVoice模型耗时，可以关闭VAD模型。
+- `vad_kwargs`：表示VAD模型配置,`max_single_segment_time`: 表示`vad_model`最大切割音频时长, 单位是毫秒ms。
+- `use_itn`：输出结果中是否包含标点与逆文本正则化。
+- `batch_size_s` 表示采用动态batch，batch中总音频时长，单位为秒s。
+- `merge_vad`：是否将 vad 模型切割的短音频碎片合成，合并后长度为`merge_length_s`，单位为秒s。
 
-funasr版本已经集成了vad模型，支持任意时长音频输入，`batch_size_s`单位为秒。
-如果输入均为短音频，并且需要批量化推理，为了加快推理效率，可以移除vad模型，并设置`batch_size`
+如果输入均为短音频（小于30s），并且需要批量化推理，为了加快推理效率，可以移除vad模型，并设置`batch_size`
 
 ```python
 model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
 
 res = model.generate(
-    input=input_file,
+    input=f"{model.model_path}/example/en.mp3",
     cache={},
     language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
+    use_itn=True,
     batch_size=64, 
 )
 ```
 
 更多详细用法，请参考 [文档](https://github.com/modelscope/FunASR/blob/main/docs/tutorial/README.md)
 
+### 直接推理
+
+支持任意格式音频输入，输入音频时长限制在30s以下
+
+```python
+from model import SenseVoiceSmall
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
+
+model_dir = "iic/SenseVoiceSmall"
+m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir, device="cuda:0")
+
+
+res = m.inference(
+    data_in=f"{kwargs['model_path']}/example/en.mp3",
+    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=False,
+    **kwargs,
+)
+
+text = rich_transcription_postprocess(res[0][0]["text"])
+print(text)
+```
+
 ## 服务部署
 
 Undo
 
-### 导出与测试
+### 导出与测试（*进行中*）
+
 
 ```python
 # pip3 install -U funasr-onnx

@@ -1,4 +1,4 @@
-([简体中文](./README_zh.md)|English)
+([简体中文](./README_zh.md)|English|[日本語](./README_ja.md))
 
 
 # Introduction
@@ -11,8 +11,7 @@ SenseVoice is a speech foundation model with multiple speech understanding capab
 
 <div align="center">  
 <h4>
-<a href="https://www.modelscope.cn/studios/iic/SenseVoice"> Online Demo </a>
-｜<a href="https://fun-audio-llm.github.io/"> Homepage </a>
+<a href="https://fun-audio-llm.github.io/"> Homepage </a>
 ｜<a href="#What's News"> What's News </a>
 ｜<a href="#Benchmarks"> Benchmarks </a>
 ｜<a href="#Install"> Install </a>
@@ -23,11 +22,15 @@ SenseVoice is a speech foundation model with multiple speech understanding capab
 Model Zoo:
 [modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall), [huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)
 
+Online Demo:
+[modelscope demo](https://www.modelscope.cn/studios/iic/SenseVoice), [huggingface space](https://huggingface.co/spaces/FunAudioLLM/SenseVoice)
+
+
 </div>
 
 
 <a name="Highligts"></a>
-# Highligts 🎯
+# Highlights 🎯
 **SenseVoice** focuses on high-accuracy multilingual speech recognition, speech emotion recognition, and audio event detection.
 - **Multilingual Speech Recognition:** Trained with over 400,000 hours of data, supporting more than 50 languages, the recognition performance surpasses that of the Whisper model.
 - **Rich transcribe:** 
@@ -95,61 +98,55 @@ pip install -r requirements.txt
 
 ## Inference
 
-### Method 1
-
-```python
-from model import SenseVoiceSmall
-
-model_dir = "iic/SenseVoiceSmall"
-m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir)
-
-
-res = m.inference(
-    data_in="https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav",
-    language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
-    **kwargs,
-)
-
-print(res)
-```
-
-### Method 2
+Supports input of audio in any format and of any duration.
 
 ```python
 from funasr import AutoModel
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
-input_file = (
-    "https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_zh.wav"
+
+
+model = AutoModel(
+    model=model_dir,
+    trust_remote_code=True,
+    remote_code="./model.py",    
+    vad_model="fsmn-vad",
+    vad_kwargs={"max_single_segment_time": 30000},
+    device="cuda:0",
 )
 
-model = AutoModel(model=model_dir,
-                  vad_model="fsmn-vad",
-                  vad_kwargs={"max_single_segment_time": 30000},
-                  trust_remote_code=True, device="cuda:0")
-
+# en
 res = model.generate(
-    input=input_file,
+    input=f"{model.model_path}/example/en.mp3",
     cache={},
-    language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
-    use_itn=False,
-    batch_size_s=0, 
+    language="auto",  # "zn", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=True,
+    batch_size_s=60,
+    merge_vad=True,  #
+    merge_length_s=15,
 )
-
 text = rich_transcription_postprocess(res[0]["text"])
-
 print(text)
 ```
 
-The funasr version has integrated the VAD (Voice Activity Detection) model and supports audio input of any duration, with `batch_size_s` in seconds.
-If all inputs are short audios, and batch inference is needed to speed up inference efficiency, the VAD model can be removed, and `batch_size` can be set accordingly.
+Parameter Description:
+- `model_dir`: The name of the model, or the path to the model on the local disk.
+- `trust_remote_code`:
+  - When `True`, it means that the model's code implementation is loaded from `remote_code`, which specifies the exact location of the `model` code (for example, `model.py` in the current directory). It supports absolute paths, relative paths, and network URLs.
+  - When `False`, it indicates that the model's code implementation is the integrated version within [FunASR](https://github.com/modelscope/FunASR). At this time, modifications made to `model.py` in the current directory will not be effective, as the version loaded is the internal one from FunASR. For the model code, [click here to view](https://github.com/modelscope/FunASR/tree/main/funasr/models/sense_voice).
+- `vad_model`: This indicates the activation of VAD (Voice Activity Detection). The purpose of VAD is to split long audio into shorter clips. In this case, the inference time includes both VAD and SenseVoice total consumption, and represents the end-to-end latency. If you wish to test the SenseVoice model's inference time separately, the VAD model can be disabled.
+- `vad_kwargs`: Specifies the configurations for the VAD model. `max_single_segment_time`: denotes the maximum duration for audio segmentation by the `vad_model`, with the unit being milliseconds (ms).
+- `use_itn`: Whether the output result includes punctuation and inverse text normalization.
+- `batch_size_s`: Indicates the use of dynamic batching, where the total duration of audio in the batch is measured in seconds (s).
+- `merge_vad`: Whether to merge short audio fragments segmented by the VAD model, with the merged length being `merge_length_s`, in seconds (s).
+
+If all inputs are short audios (<30s), and batch inference is needed to speed up inference efficiency, the VAD model can be removed, and `batch_size` can be set accordingly.
 ```python
 model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
 
 res = model.generate(
-    input=input_file,
+    input=f"{model.model_path}/example/en.mp3",
     cache={},
     language="zh", # "zn", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
@@ -159,9 +156,30 @@ res = model.generate(
 
 For more usage, please refer to [docs](https://github.com/modelscope/FunASR/blob/main/docs/tutorial/README.md)
 
+### Inference directly
+
+Supports input of audio in any format, with an input duration limit of 30 seconds or less.
+
+```python
+from model import SenseVoiceSmall
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
+
+model_dir = "iic/SenseVoiceSmall"
+m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir, device="cuda:0")
 
 
-### Export and Test
+res = m.inference(
+    data_in=f"{kwargs['model_path']}/example/en.mp3",
+    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=False,
+    **kwargs,
+)
+
+text = rich_transcription_postprocess(res[0][0]["text"])
+print(text)
+```
+
+### Export and Test (*On going*)
 
 ```python
 # pip3 install -U funasr-onnx
