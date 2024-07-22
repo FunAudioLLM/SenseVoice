@@ -143,6 +143,7 @@ print(text)
 - `use_itn`：输出结果中是否包含标点与逆文本正则化。
 - `batch_size_s` 表示采用动态batch，batch中总音频时长，单位为秒s。
 - `merge_vad`：是否将 vad 模型切割的短音频碎片合成，合并后长度为`merge_length_s`，单位为秒s。
+- `ban_emo_unk`：禁用emo_unk标签，禁用后所有的句子都会被赋与情感标签。
 
 如果输入均为短音频（小于30s），并且需要批量化推理，为了加快推理效率，可以移除vad模型，并设置`batch_size`
 
