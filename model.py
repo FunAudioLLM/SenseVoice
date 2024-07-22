@@ -1,24 +1,18 @@
-from typing import Iterable, Optional
-import types
-import time
-import numpy as np
-import torch
-import torch.nn.functional as F
-from torch import Tensor
-from torch import nn
-from torch.cuda.amp import autocast
-from funasr.metrics.compute_acc import compute_accuracy, th_accuracy
-from funasr.losses.label_smoothing_loss import LabelSmoothingLoss
-from funasr.train_utils.device_funcs import force_gatherable
 
-from funasr.utils.load_utils import load_audio_text_image_video, extract_fbank
-from funasr.utils.datadir_writer import DatadirWriter
-from funasr.models.ctc.ctc import CTC
+import time
+import torch
+from torch import nn
+import torch.nn.functional as F
+from typing import Iterable, Optional
 
 from funasr.register import tables
-
-
+from funasr.models.ctc.ctc import CTC
+from funasr.utils.datadir_writer import DatadirWriter
 from funasr.models.paraformer.search import Hypothesis
+from funasr.train_utils.device_funcs import force_gatherable
+from funasr.losses.label_smoothing_loss import LabelSmoothingLoss
+from funasr.metrics.compute_acc import compute_accuracy, th_accuracy
+from funasr.utils.load_utils import load_audio_text_image_video, extract_fbank
 
 
 class SinusoidalPositionEncoder(torch.nn.Module):
@@ -890,7 +884,7 @@ class SenseVoiceSmall(nn.Module):
         return results, meta_data
 
     def export(self, **kwargs):
-        from .export_meta import export_rebuild_model
+        from export_meta import export_rebuild_model
 
         if "max_seq_len" not in kwargs:
             kwargs["max_seq_len"] = 512
