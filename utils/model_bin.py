@@ -1,5 +1,6 @@
+#!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
-# Copyright FunASR (https://github.com/alibaba-damo-academy/FunASR). All Rights Reserved.
+# Copyright FunASR (https://github.com/FunAudioLLM/SenseVoice). All Rights Reserved.
 #  MIT License  (https://opensource.org/licenses/MIT)
 
 import os.path
@@ -18,9 +19,7 @@ from utils.infer_utils import (
     get_logger,
     read_yaml,
 )
-# from .utils.postprocess_utils import sentence_postprocess, sentence_postprocess_sentencepiece
 from utils.frontend import WavFrontend
-# from .utils.timestamp_utils import time_stamp_lfr6_onnx
 from utils.infer_utils import pad_list
 
 logging = get_logger()
