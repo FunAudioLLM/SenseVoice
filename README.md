@@ -140,6 +140,7 @@ Parameter Description:
 - `use_itn`: Whether the output result includes punctuation and inverse text normalization.
 - `batch_size_s`: Indicates the use of dynamic batching, where the total duration of audio in the batch is measured in seconds (s).
 - `merge_vad`: Whether to merge short audio fragments segmented by the VAD model, with the merged length being `merge_length_s`, in seconds (s).
+- `ban_emo_unk`: Whether to ban the output of the `emo_unk` token.
 
 If all inputs are short audios (<30s), and batch inference is needed to speed up inference efficiency, the VAD model can be removed, and `batch_size` can be set accordingly.
 ```python
