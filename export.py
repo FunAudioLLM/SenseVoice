@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- encoding: utf-8 -*-
-# Copyright FunASR (https://github.com/alibaba-damo-academy/FunASR). All Rights Reserved.
+# Copyright FunASR (https://github.com/FunAudioLLM/SenseVoice). All Rights Reserved.
 #  MIT License  (https://opensource.org/licenses/MIT)
 
 import os
@@ -44,4 +44,4 @@ wav_or_scp = "/Users/shixian/Downloads/asr_example_hotword.wav"
 language_list = [0]
 textnorm_list = [15]
 res = model_bin(wav_or_scp, language_list, textnorm_list, tokenizer=tokenizer)
-print(res)
+print([rich_transcription_postprocess(i) for i in res])

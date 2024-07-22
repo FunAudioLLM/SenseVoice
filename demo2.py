@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+# -*- encoding: utf-8 -*-
+# Copyright FunASR (https://github.com/FunAudioLLM/SenseVoice). All Rights Reserved.
+#  MIT License  (https://opensource.org/licenses/MIT)
+
 from model import SenseVoiceSmall
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
