@@ -221,7 +221,7 @@ res = model(wav_or_scp, language="auto", use_itn=True)
 print([rich_transcription_postprocess(i) for i in res])
 ```
 Note: Libtorch model is exported to the original model directory.
-<details>
+</details>
 
 ## Service
 

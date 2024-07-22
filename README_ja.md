@@ -226,7 +226,7 @@ print([rich_transcription_postprocess(i) for i in res])
 ```
 備考：Libtorchモデルは元のモデルディレクトリにエクスポートされます。
 
-<details>
+</details>
 
 ### 展開
 
