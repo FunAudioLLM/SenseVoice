@@ -243,12 +243,78 @@ pip3 install -e ./
 
 ### データ準備
 
-データ形式には以下のフィールドが含まれている必要があります：
+データ例
 ```text
 {"key": "YOU0000008470_S0000238_punc_itn", "text_language": "<|en|>", "emo_target": "<|NEUTRAL|>", "event_target": "<|Speech|>", "with_or_wo_itn": "<|withitn|>", "target": "Including legal due diligence, subscription agreement, negotiation.", "source": "/cpfs01/shared/Group-speech/beinian.lzr/data/industrial_data/english_all/audio/YOU0000008470_S0000238.wav", "target_len": 7, "source_len": 140}
 {"key": "AUD0000001556_S0007580", "text_language": "<|en|>", "emo_target": "<|NEUTRAL|>", "event_target": "<|Speech|>", "with_or_wo_itn": "<|woitn|>", "target": "there is a tendency to identify the self or take interest in what one has got used to", "source": "/cpfs01/shared/Group-speech/beinian.lzr/data/industrial_data/english_all/audio/AUD0000001556_S0007580.wav", "target_len": 18, "source_len": 360}
 ```
-詳細は：`data/train_example.jsonl`を参照してください。
+詳細は `data/train_example.jsonl` を参照してください。
+
+説明：
+- `key`：音声ファイルのユニークID
+- `source`：音声ファイルのパス
+- `source_len`：音声ファイルのfbankフレーム数
+- `target`：文字起こし結果
+- `target_len`：target（文字起こし）の長さ
+- `text_language`：音声ファイルの言語ID
+- `emo_target`：音声ファイルの感情ラベル
+- `event_target`：音声ファイルのイベントラベル
+- `with_or_wo_itn`：句読点と逆テキスト正規化を含むかどうか
+
+`train_text.txt`
+```bash
+BAC009S0764W0121 甚至出现交易几乎停滞的情况
+BAC009S0916W0489 湖北一公司以员工名义贷款数十员工负债千万
+asr_example_cn_en 所有只要处理 data 不管你是做 machine learning 做 deep learning 做 data analytics 做 data science 也好 scientist 也好通通都要都做的基本功啊那 again 先先对有一些>也许对
+ID0012W0014 he tried to think how it could be
+```
+`train_wav.scp`
+```bash
+BAC009S0764W0121 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/BAC009S0764W0121.wav
+BAC009S0916W0489 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/BAC009S0916W0489.wav
+asr_example_cn_en https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_cn_en.wav
+ID0012W0014 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_en.wav
+```
+`train_text_language.txt`
+言語IDは `<|zh|>`、`<|en|>`、`<|yue|>`、`<|ja|>`、および `<|ko|>`を含みます。
+```bash
+BAC009S0764W0121 <|zh|>
+BAC009S0916W0489 <|zh|>
+asr_example_cn_en <|zh|>
+ID0012W0014 <|en|>
+```
+`train_emo.txt`
+感情ラベルは、`<|HAPPY|>`、`<|SAD|>`、`<|ANGRY|>`、`<|NEUTRAL|>`、`<|FEARFUL|>`、`<|DISGUSTED|>` および `<|SURPRISED|>`を含みます。
+```bash
+BAC009S0764W0121 <|NEUTRAL|>
+BAC009S0916W0489 <|NEUTRAL|>
+asr_example_cn_en <|NEUTRAL|>
+ID0012W0014 <|NEUTRAL|>
+```
+`train_event.txt`
+イベントラベルは、 `<|BGM|>`、`<|Speech|>`、`<|Applause|>`、`<|Laughter|>`、`<|Cry|>`、`<|Sneeze|>`、`<|Breath|>` および `<|Cough|>`を含みます。
+```bash
+BAC009S0764W0121 <|Speech|>
+BAC009S0916W0489 <|Speech|>
+asr_example_cn_en <|Speech|>
+ID0012W0014 <|Speech|>
+```
+`コマンド`
+```shell
+# wav.scp、text.txt、text_language.txt、emo_target.txt、event_target.txt から train.jsonl と val.jsonl を生成します
+sensevoice2jsonl \
+++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt", "../../../data/list/train_text_language.txt", "../../../data/list/train_emo.txt", "../../../data/list/train_event.txt"]' \
+++data_type_list='["source", "target", "text_language", "emo_target", "event_target"]' \
+++jsonl_file_out="../../../data/list/train.jsonl"
+```
+`train_text_language.txt`、`train_emo_target.txt`、`train_event_target.txt` がない場合、`SenseVoice` モデルを使用して言語、感情、およびイベントラベルが自動的に予測されます。
+```shell
+# wav.scp と text.txt から train.jsonl と val.jsonl を生成します
+sensevoice2jsonl \
+++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt"]' \
+++data_type_list='["source", "target"]' \
+++jsonl_file_out="../../../data/list/train.jsonl"
+```
 
 ### トレーニングの開始
 
@@ -265,6 +331,10 @@ python webui.py
 ```
 
 <div align="center"><img src="image/webui.png" width="700"/> </div>
+
+## 注目すべきサードパーティの取り組み
+- Triton (GPU) デプロイメントのベストプラクティス：Triton + TensorRT を使用し、FP32 でテスト。V100 GPU で加速比 526 を達成。FP16 のサポートは進行中です。[リポジトリ](https://github.com/modelscope/FunASR/blob/main/runtime/triton_gpu/README.md)
+- Sherpa-onnx デプロイメントのベストプラクティス：SenseVoice を10種類のプログラミング言語（C++, C, Python, C#, Go, Swift, Kotlin, Java, JavaScript, Dart）で使用可能。また、iOS, Android, Raspberry Pi などのプラットフォームでも SenseVoice をデプロイできます。[リポジトリ](https://k2-fsa.github.io/sherpa/onnx/sense-voice/index.html)
 
 # お問い合わせ
 

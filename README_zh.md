@@ -361,6 +361,11 @@ python webui.py
 
 <div align="center"><img src="image/webui.png" width="700"/> </div>
 
+## 优秀三方工作
+
+- Triton（GPU）部署最佳实践，triton + tensorrt，fp32测试，V100 GPU上加速比526，fp16支持中，[repo](https://github.com/modelscope/FunASR/blob/main/runtime/triton_gpu/README.md)
+- sherpa-onnx部署最佳实践，支持在10种编程语言里面使用 SenseVoice, 即 C++, C, Python, C#, Go, Swift, Kotlin, Java, JavaScript, Dart. 支持在 iOS, Android, Raspberry Pi 等平台使用SenseVoice，[repo](https://k2-fsa.github.io/sherpa/onnx/sense-voice/index.html)
+
 # 联系我们
 
 如果您在使用中遇到问题，可以直接在github页面提Issues。欢迎语音兴趣爱好者扫描以下的钉钉群二维码加入社区群，进行交流和讨论。
