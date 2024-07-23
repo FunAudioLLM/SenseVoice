@@ -254,6 +254,97 @@ pip3 install -e ./
 ```
 详细可以参考：`data/train_example.jsonl`
 
+字段说明：
+- `key`: 数据唯一ID
+- `source`：音频文件的路径
+- `source_len`：音频文件的fbank帧数
+- `target`：音频文件标注文本
+- `target_len`：音频文件标注文本长度
+- `text_language`：音频文件的语种标签
+- `emo_target`：音频文件的情感标签
+- `event_target`：音频文件的事件标签
+- `with_or_wo_itn`：标注文本中是否包含标点与逆文本正则化
+
+可以用指令 `sensevoice2jsonl` 从train_wav.scp、train_text.txt、train_text_language.txt、train_emo_target.txt和train_event_target.txt生成，准备过程如下：
+
+`train_text.txt`
+
+左边为数据唯一ID，需与`train_wav.scp`中的`ID`一一对应
+右边为音频文件标注文本，格式如下：
+
+```bash
+BAC009S0764W0121 甚至出现交易几乎停滞的情况
+BAC009S0916W0489 湖北一公司以员工名义贷款数十员工负债千万
+asr_example_cn_en 所有只要处理 data 不管你是做 machine learning 做 deep learning 做 data analytics 做 data science 也好 scientist 也好通通都要都做的基本功啊那 again 先先对有一些>也许对
+ID0012W0014 he tried to think how it could be
+```
+
+`train_wav.scp`
+
+左边为数据唯一ID，需与`train_text.txt`中的`ID`一一对应
+右边为音频文件的路径，格式如下
+
+```bash
+BAC009S0764W0121 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/BAC009S0764W0121.wav
+BAC009S0916W0489 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/BAC009S0916W0489.wav
+asr_example_cn_en https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_cn_en.wav
+ID0012W0014 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_en.wav
+```
+
+`train_text_language.txt`
+
+左边为数据唯一ID，需与`train_text_language.txt`中的`ID`一一对应
+右边为音频文件的语种标签，支持`<|zh|>`、`<|en|>`、`<|yue|>`、`<|ja|>`和`<|ko|>`，格式如下
+
+```bash
+BAC009S0764W0121 <|zh|>
+BAC009S0916W0489 <|zh|>
+asr_example_cn_en <|zh|>
+ID0012W0014 <|en|>
+```
+
+`train_emo.txt`
+
+左边为数据唯一ID，需与`train_emo.txt`中的`ID`一一对应
+右边为音频文件的情感标签，支持`<|HAPPY|>`、`<|SAD|>`、`<|ANGRY|>`、`<|NEUTRAL|>`、`<|FEARFUL|>`、`<|DISGUSTED|>`和`<|SURPRISED|>`，格式如下
+
+```bash
+BAC009S0764W0121 <|NEUTRAL|>
+BAC009S0916W0489 <|NEUTRAL|>
+asr_example_cn_en <|NEUTRAL|>
+ID0012W0014 <|NEUTRAL|>
+```
+
+`train_event.txt`
+
+左边为数据唯一ID，需与`train_event.txt`中的`ID`一一对应
+右边为音频文件的事件标签，支持`<|BGM|>`、`<|Speech|>`、`<|Applause|>`、`<|Laughter|>`、`<|Cry|>`、`<|Sneeze|>`、`<|Breath|>`和`<|Cough|>`，格式如下
+
+```bash
+BAC009S0764W0121 <|Speech|>
+BAC009S0916W0489 <|Speech|>
+asr_example_cn_en <|Speech|>
+ID0012W0014 <|Speech|>
+```
+
+`生成指令`
+```shell
+# generate train.jsonl and val.jsonl from wav.scp, text.txt, text_language.txt, emo_target.txt, event_target.txt
+sensevoice2jsonl \
+++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt", "../../../data/list/train_text_language.txt", "../../../data/list/train_emo.txt", "../../../data/list/train_event.txt"]' \
+++data_type_list='["source", "target", "text_language", "emo_target", "event_target"]' \
+++jsonl_file_out="../../../data/list/train.jsonl"
+```
+
+若无train_text_language.txt、train_emo_target.txt和train_event_target.txt，则自动通过使用`SenseVoice`模型对语种、情感和事件打标。
+```shell
+# generate train.jsonl and val.jsonl from wav.scp and text.txt
+sensevoice2jsonl \
+++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt"]' \
+++data_type_list='["source", "target"]' \
+++jsonl_file_out="../../../data/list/train.jsonl"
+```
+
 ### 启动训练
 
 注意修改 `finetune.sh` 中 `train_tool` 为你前面安装FunASR路径中`funasr/bin/train_ds.py`绝对路径

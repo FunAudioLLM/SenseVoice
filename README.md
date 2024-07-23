@@ -247,6 +247,91 @@ Data examples
 
 Full ref to `data/train_example.jsonl`
 
+Description：
+- `key`: audio file unique ID
+- `source`：path to the audio file
+- `source_len`：number of fbank frames of the audio file
+- `target`：transcription
+- `target_len`：length of target
+- `text_language`：language id of the audio file
+- `emo_target`：emotion label of the audio file
+- `event_target`：event label of the audio file
+- `with_or_wo_itn`：whether includes punctuation and inverse text normalization
+
+
+`train_text.txt`
+
+
+```bash
+BAC009S0764W0121 甚至出现交易几乎停滞的情况
+BAC009S0916W0489 湖北一公司以员工名义贷款数十员工负债千万
+asr_example_cn_en 所有只要处理 data 不管你是做 machine learning 做 deep learning 做 data analytics 做 data science 也好 scientist 也好通通都要都做的基本功啊那 again 先先对有一些>也许对
+ID0012W0014 he tried to think how it could be
+```
+
+`train_wav.scp`
+
+
+
+```bash
+BAC009S0764W0121 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/BAC009S0764W0121.wav
+BAC009S0916W0489 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/BAC009S0916W0489.wav
+asr_example_cn_en https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_cn_en.wav
+ID0012W0014 https://isv-data.oss-cn-hangzhou.aliyuncs.com/ics/MaaS/ASR/test_audio/asr_example_en.wav
+```
+
+`train_text_language.txt`
+
+The language ids include `<|zh|>`、`<|en|>`、`<|yue|>`、`<|ja|>` and `<|ko|>`.
+
+```bash
+BAC009S0764W0121 <|zh|>
+BAC009S0916W0489 <|zh|>
+asr_example_cn_en <|zh|>
+ID0012W0014 <|en|>
+```
+
+`train_emo.txt`
+
+The emotion labels include`<|HAPPY|>`、`<|SAD|>`、`<|ANGRY|>`、`<|NEUTRAL|>`、`<|FEARFUL|>`、`<|DISGUSTED|>` and `<|SURPRISED|>`.
+
+```bash
+BAC009S0764W0121 <|NEUTRAL|>
+BAC009S0916W0489 <|NEUTRAL|>
+asr_example_cn_en <|NEUTRAL|>
+ID0012W0014 <|NEUTRAL|>
+```
+
+`train_event.txt`
+
+The event labels include`<|BGM|>`、`<|Speech|>`、`<|Applause|>`、`<|Laughter|>`、`<|Cry|>`、`<|Sneeze|>`、`<|Breath|>` and `<|Cough|>`.
+
+```bash
+BAC009S0764W0121 <|Speech|>
+BAC009S0916W0489 <|Speech|>
+asr_example_cn_en <|Speech|>
+ID0012W0014 <|Speech|>
+```
+
+`Command`
+```shell
+# generate train.jsonl and val.jsonl from wav.scp, text.txt, text_language.txt, emo_target.txt, event_target.txt
+sensevoice2jsonl \
+++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt", "../../../data/list/train_text_language.txt", "../../../data/list/train_emo.txt", "../../../data/list/train_event.txt"]' \
+++data_type_list='["source", "target", "text_language", "emo_target", "event_target"]' \
+++jsonl_file_out="../../../data/list/train.jsonl"
+```
+
+If there is no `train_text_language.txt`, `train_emo_target.txt` and `train_event_target.txt`, the language, emotion and event label will be predicted automatically by using the `SenseVoice` model.
+```shell
+# generate train.jsonl and val.jsonl from wav.scp and text.txt
+sensevoice2jsonl \
+++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt"]' \
+++data_type_list='["source", "target"]' \
+++jsonl_file_out="../../../data/list/train.jsonl"
+```
+
+
 ### Finetune
 
 Ensure to modify the train_tool in finetune.sh to the absolute path of `funasr/bin/train_ds.py` from the FunASR installation directory you have set up earlier.
