@@ -250,6 +250,8 @@ pip3 install -e ./
 ```
 詳細は `data/train_example.jsonl` を参照してください。
 
+<details><summary>データ準備の詳細</summary>
+
 説明：
 - `key`：音声ファイルのユニークID
 - `source`：音声ファイルのパス
@@ -315,6 +317,7 @@ sensevoice2jsonl \
 ++data_type_list='["source", "target"]' \
 ++jsonl_file_out="../../../data/list/train.jsonl"
 ```
+</details>
 
 ### トレーニングの開始
 

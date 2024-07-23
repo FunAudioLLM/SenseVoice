@@ -247,6 +247,8 @@ Data examples
 
 Full ref to `data/train_example.jsonl`
 
+<details><summary>Data Prepare Details</summary>
+
 Description：
 - `key`: audio file unique ID
 - `source`：path to the audio file
@@ -330,7 +332,7 @@ sensevoice2jsonl \
 ++data_type_list='["source", "target"]' \
 ++jsonl_file_out="../../../data/list/train.jsonl"
 ```
-
+</details>
 
 ### Finetune
 
