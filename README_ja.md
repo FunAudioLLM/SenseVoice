@@ -130,7 +130,9 @@ res = model.generate(
 text = rich_transcription_postprocess(res[0]["text"])
 print(text)
 ```
-パラメータの説明：
+
+<details><summary>パラメータの説明（クリックして展開）</summary>
+
 - `model_dir`：モデル名、またはローカルディスク上のモデルパス。
 - `trust_remote_code`：
   - `True`は、modelコードの実装が`remote_code`からロードされることを意味し、`remote_code`は`model`コードの正確な位置を指定します（例：現在のディレクトリの`model.py`）。絶対パス、相対パス、およびネットワークURLをサポートします。
@@ -141,6 +143,7 @@ print(text)
 - `batch_size_s`：動的バッチの使用を示し、バッチ内の音声の合計長を秒（s）で測定します。
 - `merge_vad`：VADモデルによって分割された短い音声フラグメントをマージするかどうか。マージ後の長さは`merge_length_s`で、単位は秒（s）です。
 - `ban_emo_unk`：emo_unkラベルを無効にする。
+</details>
 
 すべての入力が短い音声（30秒未満）であり、バッチ推論が必要な場合、推論効率を向上させるためにVADモデルを削除し、`batch_size`を設定できます。
 

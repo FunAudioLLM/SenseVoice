@@ -131,7 +131,8 @@ text = rich_transcription_postprocess(res[0]["text"])
 print(text)
 ```
 
-Parameter Description:
+<details><summary>Parameter Description (Click to Expand)</summary>
+
 - `model_dir`: The name of the model, or the path to the model on the local disk.
 - `trust_remote_code`:
   - When `True`, it means that the model's code implementation is loaded from `remote_code`, which specifies the exact location of the `model` code (for example, `model.py` in the current directory). It supports absolute paths, relative paths, and network URLs.
@@ -142,6 +143,7 @@ Parameter Description:
 - `batch_size_s`: Indicates the use of dynamic batching, where the total duration of audio in the batch is measured in seconds (s).
 - `merge_vad`: Whether to merge short audio fragments segmented by the VAD model, with the merged length being `merge_length_s`, in seconds (s).
 - `ban_emo_unk`: Whether to ban the output of the `emo_unk` token.
+</details>
 
 If all inputs are short audios (<30s), and batch inference is needed to speed up inference efficiency, the VAD model can be removed, and `batch_size` can be set accordingly.
 ```python

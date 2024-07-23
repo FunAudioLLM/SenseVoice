@@ -134,7 +134,8 @@ res = model.generate(
 text = rich_transcription_postprocess(res[0]["text"])
 print(text)
 ```
-参数说明：
+<details><summary>参数说明（点击展开）</summary>
+
 - `model_dir`：模型名称，或本地磁盘中的模型路径。
 - `trust_remote_code`：
   - `True`表示model代码实现从`remote_code`处加载，`remote_code`指定`model`具体代码的位置（例如，当前目录下的`model.py`），支持绝对路径与相对路径，以及网络url。
@@ -145,6 +146,7 @@ print(text)
 - `batch_size_s` 表示采用动态batch，batch中总音频时长，单位为秒s。
 - `merge_vad`：是否将 vad 模型切割的短音频碎片合成，合并后长度为`merge_length_s`，单位为秒s。
 - `ban_emo_unk`：禁用emo_unk标签，禁用后所有的句子都会被赋与情感标签。
+</details>
 
 如果输入均为短音频（小于30s），并且需要批量化推理，为了加快推理效率，可以移除vad模型，并设置`batch_size`
 
