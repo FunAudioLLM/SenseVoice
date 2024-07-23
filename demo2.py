@@ -9,12 +9,13 @@ from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
 m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir, device="cuda:0")
-
+m.eval()
 
 res = m.inference(
     data_in=f"{kwargs['model_path']}/example/en.mp3",
     language="auto", # "zh", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
+    ban_emo_unk=False,
     **kwargs,
 )
 
