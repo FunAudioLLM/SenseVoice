@@ -125,7 +125,7 @@ model = AutoModel(
 res = model.generate(
     input=f"{model.model_path}/example/en.mp3",
     cache={},
-    language="auto",  # "zn", "en", "yue", "ja", "ko", "nospeech"
+    language="auto",  # "zh", "en", "yue", "ja", "ko", "nospeech"
     use_itn=True,
     batch_size_s=60,
     merge_vad=True,  #
@@ -154,7 +154,7 @@ model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
 res = model.generate(
     input=f"{model.model_path}/example/en.mp3",
     cache={},
-    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
+    language="auto", # "zh", "en", "yue", "ja", "ko", "nospeech"
     use_itn=True,
     batch_size=64, 
 )
@@ -176,7 +176,7 @@ m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir, device="cuda:0")
 
 res = m.inference(
     data_in=f"{kwargs['model_path']}/example/en.mp3",
-    language="auto", # "zn", "en", "yue", "ja", "ko", "nospeech"
+    language="auto", # "zh", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
     **kwargs,
 )
