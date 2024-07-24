@@ -346,7 +346,8 @@ sensevoice2jsonl \
 sensevoice2jsonl \
 ++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt"]' \
 ++data_type_list='["source", "target"]' \
-++jsonl_file_out="../../../data/list/train.jsonl"
+++jsonl_file_out="../../../data/list/train.jsonl" \
+++model_dir='iic/SenseVoiceSmall'
 ```
 </details>
 
