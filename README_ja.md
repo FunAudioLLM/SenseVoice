@@ -234,7 +234,11 @@ print([rich_transcription_postprocess(i) for i in res])
 
 ### 展開
 
-未完了
+### FastAPIを使った展開
+```shell
+export SENSEVOICE_DEVICE=cuda:0
+fastapi run --port 50000
+```
 
 ## 微調整
 

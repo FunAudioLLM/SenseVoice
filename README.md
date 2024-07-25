@@ -228,7 +228,11 @@ Note: Libtorch model is exported to the original model directory.
 
 ## Service
 
-Undo
+### Deployment with FastAPI
+```shell
+export SENSEVOICE_DEVICE=cuda:0
+fastapi run --port 50000
+```
 
 ## Finetune
 
