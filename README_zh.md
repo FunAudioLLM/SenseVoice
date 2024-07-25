@@ -237,7 +237,11 @@ print([rich_transcription_postprocess(i) for i in res])
 
 ### 部署
 
-待完成
+### 使用 FastAPI 部署
+```shell
+export SENSEVOICE_DEVICE=cuda:0
+fastapi run --port 50000
+```
 
 ## 微调
 
