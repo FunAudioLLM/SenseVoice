@@ -118,7 +118,7 @@ from funasr.utils.postprocess_utils import rich_transcription_postprocess
 model_dir = "iic/SenseVoiceSmall"
 
 
-model = AutoModel (
+model = AutoModel(
     model=model_dir,
     trust_remote_code=True,
     remote_code="./model.py",  
@@ -128,17 +128,17 @@ model = AutoModel (
 )
 
 # en
-res = model.generate (
+res = model.generate(
     input=f"{model.model_path}/example/en.mp3",
     cache={},
     language="auto",  # "zh", "en", "yue", "ja", "ko", "nospeech"
     use_itn=True,
     batch_size_s=60,
-    merge_vad=True,  #
+    merge_vad=True,
     merge_length_s=15,
 )
-text = rich_transcription_postprocess (res [0]["text"])
-print (text)
+text = rich_transcription_postprocess(res[0]["text"])
+print(text)
 ```
 
 <details><summary> 参数说明（点击展开）</summary>
@@ -159,9 +159,9 @@ print (text)
 如果输入均为短音频（小于 30s），并且需要批量化推理，为了加快推理效率，可以移除 vad 模型，并设置 `batch_size`
 
 ```python
-model = AutoModel (model=model_dir, trust_remote_code=True, device="cuda:0")
+model = AutoModel(model=model_dir, trust_remote_code=True, device="cuda:0")
 
-res = model.generate (
+res = model.generate(
     input=f"{model.model_path}/example/en.mp3",
     cache={},
     language="auto", # "zh", "en", "yue", "ja", "ko", "nospeech"
@@ -181,10 +181,10 @@ from model import SenseVoiceSmall
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
-m, kwargs = SenseVoiceSmall.from_pretrained (model=model_dir, device="cuda:0")
-m.eval ()
+m, kwargs = SenseVoiceSmall.from_pretrained(model=model_dir, device="cuda:0")
+m.eval()
 
-res = m.inference (
+res = m.inference(
     data_in=f"{kwargs ['model_path']}/example/en.mp3",
     language="auto", # "zh", "en", "yue", "ja", "ko", "nospeech"
     use_itn=False,
@@ -192,8 +192,8 @@ res = m.inference (
     **kwargs,
 )
 
-text = rich_transcription_postprocess (res [0][0]["text"])
-print (text)
+text = rich_transcription_postprocess(res [0][0]["text"])
+print(text)
 ```
 
 ## 服务部署
@@ -215,13 +215,13 @@ from funasr_onnx.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
 
-model = SenseVoiceSmall (model_dir, batch_size=10, quantize=True)
+model = SenseVoiceSmall(model_dir, batch_size=10, quantize=True)
 
 # inference
-wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format (Path.home (), model_dir)]
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
 
-res = model (wav_or_scp, language="auto", use_itn=True)
-print ([rich_transcription_postprocess (i) for i in res])
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess(i) for i in res])
 ```
 
 备注：ONNX 模型导出到原模型目录中
@@ -236,12 +236,12 @@ from funasr_torch.utils.postprocess_utils import rich_transcription_postprocess
 
 model_dir = "iic/SenseVoiceSmall"
 
-model = SenseVoiceSmall (model_dir, batch_size=10, device="cuda:0")
+model = SenseVoiceSmall(model_dir, batch_size=10, device="cuda:0")
 
-wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format (Path.home (), model_dir)]
+wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
 
-res = model (wav_or_scp, language="auto", use_itn=True)
-print ([rich_transcription_postprocess (i) for i in res])
+res = model(wav_or_scp, language="auto", use_itn=True)
+print([rich_transcription_postprocess (i) for i in res])
 ```
 
 备注：Libtorch 模型导出到原模型目录中
