@@ -228,7 +228,11 @@ Note: Libtorch model is exported to the original model directory.
 
 ## Service
 
-Undo
+### Deployment with FastAPI
+```shell
+export SENSEVOICE_DEVICE=cuda:0
+fastapi run --port 50000
+```
 
 ## Finetune
 
@@ -333,7 +337,8 @@ If there is no `train_text_language.txt`, `train_emo_target.txt` and `train_even
 sensevoice2jsonl \
 ++scp_file_list='["../../../data/list/train_wav.scp", "../../../data/list/train_text.txt"]' \
 ++data_type_list='["source", "target"]' \
-++jsonl_file_out="../../../data/list/train.jsonl"
+++jsonl_file_out="../../../data/list/train.jsonl" \
+++model_dir='iic/SenseVoiceSmall'
 ```
 </details>
 

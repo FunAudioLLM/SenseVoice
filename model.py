@@ -691,10 +691,11 @@ class SenseVoiceSmall(nn.Module):
             encoder_out[:, :4, :], text[:, :4]
         )
 
-        loss = loss_ctc
+        loss = loss_ctc + loss_rich
         # Collect total loss stats
-        stats["loss"] = torch.clone(loss.detach()) if loss_ctc is not None else None
+        stats["loss_ctc"] = torch.clone(loss_ctc.detach()) if loss_ctc is not None else None
         stats["loss_rich"] = torch.clone(loss_rich.detach()) if loss_rich is not None else None
+        stats["loss"] = torch.clone(loss.detach()) if loss is not None else None
         stats["acc_rich"] = acc_rich
 
         # force_gatherable: to-device and to-tensor if scalar for DataParallel
