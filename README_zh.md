@@ -6,7 +6,7 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 <div align="center">  
 <img src="image/sensevoice2.png">
-
+</div>
 
 <div align="center">  
 <h4>

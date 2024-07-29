@@ -6,7 +6,7 @@ SenseVoiceは、音声認識（ASR）、言語識別（LID）、音声感情認�
 
 <div align="center">  
 <img src="image/sensevoice2.png">
-
+</div>
 [//]: # (<div align="center"><img src="image/sensevoice2.png" width="700"/> </div>)
  
 <div align="center">  

@@ -5,7 +5,9 @@
 
 SenseVoice is a speech foundation model with multiple speech understanding capabilities, including automatic speech recognition (ASR),  spoken language identification (LID), speech emotion recognition (SER), and audio event detection (AED). 
 
+<div align="center">  
 <img src="image/sensevoice2.png">
+</div>
 
 [//]: # (<div align="center"><img src="image/sensevoice.png" width="700"/> </div>)
 
