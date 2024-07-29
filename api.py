@@ -10,6 +10,8 @@ from enum import Enum
 import torchaudio
 from model import SenseVoiceSmall
 from funasr.utils.postprocess_utils import rich_transcription_postprocess
+from io import BytesIO
+
 
 class Language(str, Enum):
     auto = "auto"
@@ -49,9 +51,11 @@ async def turn_audio_to_text(files: Annotated[List[bytes], File(description="wav
     audios = []
     audio_fs = 0
     for file in files:
-        data_or_path_or_list, audio_fs = torchaudio.load(file)
+        file_io = BytesIO(file)
+        data_or_path_or_list, audio_fs = torchaudio.load(file_io)
         data_or_path_or_list = data_or_path_or_list.mean(0)
         audios.append(data_or_path_or_list)
+        file_io.close()
     if lang == "":
         lang = "auto"
     if keys == "":
