@@ -50,12 +50,8 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) 是一个基础语音识别工具包，提供多种功能，包括语音识别（ASR）、语音端点检测（VAD）、标点恢复、语言模型、说话人验证、说话人分离和多人对话语音识别等。
 
 <a name="Benchmarks"></a>
-<<<<<<< HEAD
-# 性能评测 📝
-=======
 
-# Benchmarks 📝
->>>>>>> 797a9a5f9ce564d5e5a8468ba11d43a369337a6f
+# 性能评测 📝
 
 ## 多语言语音识别
 
