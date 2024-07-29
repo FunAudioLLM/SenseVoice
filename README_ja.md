@@ -9,15 +9,13 @@ SenseVoiceは、音声認識（ASR）、言語識別（LID）、音声感情認�
 
 [//]: # (<div align="center"><img src="image/sensevoice2.png" width="700"/> </div>)
  
+<div align="center">  
 <h4>
-<a href="#What's New"> ドキュメントホーム </a>
-｜<a href="#核心功能"> コア機能 </a>
-</h4>
-<h4>
-<a href="#On Going"> 最新情報 </a>
-｜<a href="#Benchmark"> ベンチマーク </a>
+<a href="https://funaudiollm.github.io/"> ホームページ </a>
+｜<a href="#最新动态"> 最新情報 </a>
+｜<a href="#性能评测"> 性能評価 </a>
 ｜<a href="#环境安装"> 環境インストール </a>
-｜<a href="#用法教程"> 使用方法 </a>
+｜<a href="#用法教程"> 使用方法チュートリアル </a>
 ｜<a href="#联系我们"> お問い合わせ </a>
 </h4>
 

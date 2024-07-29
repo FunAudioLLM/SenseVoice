@@ -7,15 +7,12 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 <div align="center">  
 <img src="image/sensevoice2.png">
 
-[//]: # (<div align="center"><img src="image/sensevoice2.png" width="700"/> </div>)
- 
+
+<div align="center">  
 <h4>
-<a href="#What's New"> 文档主页 </a>
-｜<a href="#核心功能"> 核心功能 </a>
-</h4>
-<h4>
-<a href="#On Going"> 最新动态 </a>
-｜<a href="#Benchmark"> Benchmark </a>
+<a href="https://funaudiollm.github.io/"> Homepage </a>
+｜<a href="#最新动态"> 最新动态 </a>
+｜<a href="#性能评测"> 性能评测 </a>
 ｜<a href="#环境安装"> 环境安装 </a>
 ｜<a href="#用法教程"> 用法教程 </a>
 ｜<a href="#联系我们"> 联系我们 </a>
@@ -47,7 +44,7 @@ SenseVoice是具有音频理解能力的音频基础模型，包括语音识别�
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) 是一个基础语音识别工具包，提供多种功能，包括语音识别（ASR）、语音端点检测（VAD）、标点恢复、语言模型、说话人验证、说话人分离和多人对话语音识别等。
 
 <a name="Benchmarks"></a>
-# Benchmarks 📝
+# 性能评测 📝
 
 ## 多语言语音识别
 

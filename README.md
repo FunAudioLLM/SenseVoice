@@ -11,7 +11,7 @@ SenseVoice is a speech foundation model with multiple speech understanding capab
 
 <div align="center">  
 <h4>
-<a href="https://fun-audio-llm.github.io/"> Homepage </a>
+<a href="https://funaudiollm.github.io/"> Homepage </a>
 ｜<a href="#What's News"> What's News </a>
 ｜<a href="#Benchmarks"> Benchmarks </a>
 ｜<a href="#Install"> Install </a>
