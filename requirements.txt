@@ -1,4 +1,4 @@
-torch>=1.13
+torch<=2.3
 torchaudio
 modelscope
 huggingface
