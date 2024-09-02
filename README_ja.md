@@ -344,6 +344,7 @@ python webui.py
 ## 注目すべきサードパーティの取り組み
 - Triton (GPU) デプロイメントのベストプラクティス：Triton + TensorRT を使用し、FP32 でテスト。V100 GPU で加速比 526 を達成。FP16 のサポートは進行中です。[リポジトリ](https://github.com/modelscope/FunASR/blob/main/runtime/triton_gpu/README.md)
 - Sherpa-onnx デプロイメントのベストプラクティス：SenseVoice を10種類のプログラミング言語（C++, C, Python, C#, Go, Swift, Kotlin, Java, JavaScript, Dart）で使用可能。また、iOS, Android, Raspberry Pi などのプラットフォームでも SenseVoice をデプロイできます。[リポジトリ](https://k2-fsa.github.io/sherpa/onnx/sense-voice/index.html)
+- [SenseVoice.cpp](https://github.com/lovemefan/SenseVoice.cpp) GGMLに基づいて純粋なC/C++でSenseVoiceを推測し、3ビット、4ビット、5ビット、8ビット量子化などをサポートし、サードパーティの依存関係はありません。
 
 # お問い合わせ
 

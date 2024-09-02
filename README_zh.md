@@ -392,6 +392,7 @@ python webui.py
 
 - Triton（GPU）部署最佳实践，triton + tensorrt，fp32 测试，V100 GPU 上加速比 526，fp16 支持中，[repo](https://github.com/modelscope/FunASR/blob/main/runtime/triton_gpu/README.md)
 - sherpa-onnx 部署最佳实践，支持在 10 种编程语言里面使用 SenseVoice, 即 C++, C, Python, C#, Go, Swift, Kotlin, Java, JavaScript, Dart. 支持在 iOS, Android, Raspberry Pi 等平台使用 SenseVoice，[repo](https://k2-fsa.github.io/sherpa/onnx/sense-voice/index.html)
+- [SenseVoice.cpp](https://github.com/lovemefan/SenseVoice.cpp) 基于GGML，在纯C/C++中推断SenseVoice，支持3位、4位、5位、8位量化等，无需第三方依赖。
 
 # 联系我们
 
