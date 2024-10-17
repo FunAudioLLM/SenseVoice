@@ -351,7 +351,7 @@ python webui.py
 
 使用中に問題が発生した場合は、githubページで直接Issuesを提起できます。音声に興味のある方は、以下のDingTalkグループQRコードをスキャンしてコミュニティグループに参加し、交流と議論を行ってください。
 
-|                           FunAudioLLM                            |                          FunASR                          |
-|:----------------------------------------------------------------:|:--------------------------------------------------------:|
-| <div align="left"><img src="image/dingding_sv.png" width="250"/> | <img src="image/dingding_funasr.png" width="250"/></div> |
+|                          FunASR                          |
+|:--------------------------------------------------------:|
+| <img src="image/dingding_funasr.png" width="250"/></div> |
 

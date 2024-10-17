@@ -373,8 +373,8 @@ If you encounter problems in use, you can directly raise Issues on the github pa
 
 You can also scan the following DingTalk group QR code to join the community group for communication and discussion.
 
-|                           FunAudioLLM                            |                          FunASR                          |
-|:----------------------------------------------------------------:|:--------------------------------------------------------:|
-| <div align="left"><img src="image/dingding_sv.png" width="250"/> | <img src="image/dingding_funasr.png" width="250"/></div> |
+|                          FunASR                          |
+|:--------------------------------------------------------:|
+| <img src="image/dingding_funasr.png" width="250"/></div> |
 
 
