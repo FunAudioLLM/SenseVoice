@@ -393,11 +393,12 @@ python webui.py
 - Triton（GPU）部署最佳实践，triton + tensorrt，fp32 测试，V100 GPU 上加速比 526，fp16 支持中，[repo](https://github.com/modelscope/FunASR/blob/main/runtime/triton_gpu/README.md)
 - sherpa-onnx 部署最佳实践，支持在 10 种编程语言里面使用 SenseVoice, 即 C++, C, Python, C#, Go, Swift, Kotlin, Java, JavaScript, Dart. 支持在 iOS, Android, Raspberry Pi 等平台使用 SenseVoice，[repo](https://k2-fsa.github.io/sherpa/onnx/sense-voice/index.html)
 - [SenseVoice.cpp](https://github.com/lovemefan/SenseVoice.cpp) 基于GGML，在纯C/C++中推断SenseVoice，支持3位、4位、5位、8位量化等，无需第三方依赖。
+- [流式SenseVoice](https://github.com/pengzhendong/streaming-sensevoice)，通过分块（chunk）的方式进行推理，为了实现伪流式处理，采用了截断注意力机制（truncated attention），牺牲了部分精度。此外，该技术还支持CTC前缀束搜索（CTC prefix beam search）以及热词增强功能。
 
 # 联系我们
 
 如果您在使用中遇到问题，可以直接在 github 页面提 Issues。欢迎语音兴趣爱好者扫描以下的钉钉群二维码加入社区群，进行交流和讨论。
 
-|                           FunAudioLLM                            |                          FunASR                          |
-|:----------------------------------------------------------------:|:--------------------------------------------------------:|
-| <div align="left"><img src="image/dingding_sv.png" width="250"/> | <img src="image/dingding_funasr.png" width="250"/></div> |
+|                          FunASR                          |
+|:--------------------------------------------------------:|
+| <img src="image/dingding_funasr.png" width="250"/></div> |
