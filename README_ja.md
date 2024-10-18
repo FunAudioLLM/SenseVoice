@@ -346,6 +346,7 @@ python webui.py
 - Sherpa-onnx デプロイメントのベストプラクティス：SenseVoice を10種類のプログラミング言語（C++, C, Python, C#, Go, Swift, Kotlin, Java, JavaScript, Dart）で使用可能。また、iOS, Android, Raspberry Pi などのプラットフォームでも SenseVoice をデプロイできます。[リポジトリ](https://k2-fsa.github.io/sherpa/onnx/sense-voice/index.html)
 - [SenseVoice.cpp](https://github.com/lovemefan/SenseVoice.cpp) GGMLに基づいて純粋なC/C++でSenseVoiceを推測し、3ビット、4ビット、5ビット、8ビット量子化などをサポートし、サードパーティの依存関係はありません。
 - [streaming-sensevoice](https://github.com/pengzhendong/streaming-sensevoice) ストリーム型SenseVoiceは、チャンク（chunk）方式で推論を行います。擬似ストリーミング処理を実現するために、一部の精度を犠牲にして切り捨て注意機構（truncated attention）を採用しています。さらに、この技術はCTCプレフィックスビームサーチ（CTC prefix beam search）とホットワード強化機能もサポートしています。
+- [OmniSenseVoice](https://github.com/lifeiteng/OmniSenseVoice) は、超高速推論とバッチ処理のために最適化されています。
 
 # お問い合わせ
 

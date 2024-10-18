@@ -394,6 +394,7 @@ python webui.py
 - sherpa-onnx 部署最佳实践，支持在 10 种编程语言里面使用 SenseVoice, 即 C++, C, Python, C#, Go, Swift, Kotlin, Java, JavaScript, Dart. 支持在 iOS, Android, Raspberry Pi 等平台使用 SenseVoice，[repo](https://k2-fsa.github.io/sherpa/onnx/sense-voice/index.html)
 - [SenseVoice.cpp](https://github.com/lovemefan/SenseVoice.cpp) 基于GGML，在纯C/C++中推断SenseVoice，支持3位、4位、5位、8位量化等，无需第三方依赖。
 - [流式SenseVoice](https://github.com/pengzhendong/streaming-sensevoice)，通过分块（chunk）的方式进行推理，为了实现伪流式处理，采用了截断注意力机制（truncated attention），牺牲了部分精度。此外，该技术还支持CTC前缀束搜索（CTC prefix beam search）以及热词增强功能。
+- [OmniSenseVoice](https://github.com/lifeiteng/OmniSenseVoice) 轻量化推理库，支持batch推理。
 
 # 联系我们
 
