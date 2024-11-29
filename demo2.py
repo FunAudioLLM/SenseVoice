@@ -21,3 +21,17 @@ res = m.inference(
 
 text = rich_transcription_postprocess(res[0][0]["text"])
 print(text)
+
+res = m.inference(
+    data_in=f"{kwargs['model_path']}/example/en.mp3",
+    language="auto", # "zh", "en", "yue", "ja", "ko", "nospeech"
+    use_itn=False,
+    ban_emo_unk=False,
+    output_timestamp=True,
+    **kwargs,
+)
+
+timestamp = res[0][0]["timestamp"]
+text = rich_transcription_postprocess(res[0][0]["text"])
+print(text)
+print(timestamp)
