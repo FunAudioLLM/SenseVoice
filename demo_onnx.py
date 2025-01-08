@@ -15,5 +15,5 @@ model = SenseVoiceSmall(model_dir, batch_size=10, quantize=True)
 # inference
 wav_or_scp = ["{}/.cache/modelscope/hub/{}/example/en.mp3".format(Path.home(), model_dir)]
 
-res = model(wav_or_scp, language="auto", use_itn=True)
+res = model(wav_or_scp, language="auto", textnorm="withitn")
 print([rich_transcription_postprocess(i) for i in res])
