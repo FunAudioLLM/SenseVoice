@@ -347,7 +347,7 @@ python webui.py
 - [SenseVoice.cpp](https://github.com/lovemefan/SenseVoice.cpp) GGMLに基づいて純粋なC/C++でSenseVoiceを推測し、3ビット、4ビット、5ビット、8ビット量子化などをサポートし、サードパーティの依存関係はありません。
 - [streaming-sensevoice](https://github.com/pengzhendong/streaming-sensevoice) ストリーム型SenseVoiceは、チャンク（chunk）方式で推論を行います。擬似ストリーミング処理を実現するために、一部の精度を犠牲にして切り捨て注意機構（truncated attention）を採用しています。さらに、この技術はCTCプレフィックスビームサーチ（CTC prefix beam search）とホットワード強化機能もサポートしています。
 - [OmniSenseVoice](https://github.com/lifeiteng/OmniSenseVoice) は、超高速推論とバッチ処理のために最適化されています。
-
+- [SenseVoice Hotword](https://www.modelscope.cn/models/dengcunqin/SenseVoiceSmall_hotword)，ニューラルネットワークホットワード強化，[WeNetにおけるCPPNベースのニューラルネットワークホットワード強化のオープンソース](https://mp.weixin.qq.com/s/1QkIvh8j7rrUjRyWOgAvdA)。
 # お問い合わせ
 
 使用中に問題が発生した場合は、githubページで直接Issuesを提起できます。音声に興味のある方は、以下のDingTalkグループQRコードをスキャンしてコミュニティグループに参加し、交流と議論を行ってください。
