@@ -43,7 +43,6 @@ DISTRIBUTED_ARGS="
 echo $DISTRIBUTED_ARGS
 
 # funasr trainer path
-train_tool=
 if [ -f `dirname $(which funasr)`/train_ds.py ]; then
     train_tool=`dirname $(which funasr)`/train_ds.py
 elif [ -f `dirname $(which funasr)`/../lib/python*/site-packages/funasr/bin/train_ds.py ]; then
