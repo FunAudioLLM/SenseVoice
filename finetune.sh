@@ -43,7 +43,17 @@ DISTRIBUTED_ARGS="
 echo $DISTRIBUTED_ARGS
 
 # funasr trainer path
-train_tool=`dirname $(which funasr)`/train_ds.py
+if [ -f `dirname $(which funasr)`/train_ds.py ]; then
+    train_tool=`dirname $(which funasr)`/train_ds.py
+elif [ -f `dirname $(which funasr)`/../lib/python*/site-packages/funasr/bin/train_ds.py ]; then
+    train_tool=`dirname $(which funasr)`/../lib/python*/site-packages/funasr/bin/train_ds.py
+else
+    echo "Error: train_ds.py not found in funasr bin directory."
+    exit 1
+fi
+ABSOLUTE_PATH=$(cd $(dirname $train_tool); pwd)
+train_tool=${ABSOLUTE_PATH}/train_ds.py
+echo "Using funasr trainer: ${train_tool}"
 
 torchrun $DISTRIBUTED_ARGS \
 ${train_tool} \
