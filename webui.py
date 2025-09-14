@@ -14,12 +14,25 @@ import torchaudio
 
 from funasr import AutoModel
 
-model = "iic/SenseVoiceSmall"
-model = AutoModel(model=model,
-				  vad_model="iic/speech_fsmn_vad_zh-cn-16k-common-pytorch",
-				  vad_kwargs={"max_single_segment_time": 30000},
-				  trust_remote_code=True,
-				  )
+try:
+    # Try to connect internet
+    model = AutoModel(
+        model="iic/SenseVoiceSmall",
+        vad_model="iic/speech_fsmn_vad_zh-cn-16k-common-pytorch",
+        vad_kwargs={"max_single_segment_time": 30000},
+        trust_remote_code=True,
+    )
+except Exception:
+    # If it fails, use the model in cache
+    local_model = os.path.expanduser("~/.cache/modelscope/hub/models/iic/SenseVoiceSmall/")
+    local_vad = os.path.expanduser("~/.cache/modelscope/hub/models/iic/speech_fsmn_vad_zh-cn-16k-common-pytorch/")
+    model = AutoModel(
+        model=local_model,
+        vad_model=local_vad,
+        vad_kwargs={"max_single_segment_time": 30000},
+        trust_remote_code=True,
+        disable_update=True,  # Critical! Keep it offline
+    )
 
 import re
 
