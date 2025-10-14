@@ -907,7 +907,7 @@ class SenseVoiceSmall(nn.Module):
                 ts_max = encoder_out_lens[i] - 4
                 for pred_token, pred_frame in pred:
                     _end = _start + len(list(pred_frame))
-                    if pred_token != 0:
+                    if pred_token != 0 and token_id < len(tokens):
                         ts_left = max((_start*60-30)/1000, 0)
                         ts_right = min((_end*60-30)/1000, (ts_max*60-30)/1000)
                         timestamp.append([tokens[token_id], ts_left, ts_right])
