@@ -1,0 +1,24 @@
+name: sense
+
+services:
+  sensevoice:
+    container_name: sensevoice
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MODELSCOPE_CACHE: /models
+      SENSEVOICE_DEVICE: ${SENSEVOICE_DEVICE:-auto}
+    volumes:
+      - sensevoice-models:/models
+    ports:
+      - "50000:50000"
+    restart: on-failure:5
+    logging:
+      options:
+        max-size: "5m"
+        max-file: "3"
+    gpus: all
+
+volumes:
+  sensevoice-models:
