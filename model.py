@@ -896,7 +896,7 @@ class SenseVoiceSmall(nn.Module):
                 align = ctc_forced_align(
                     logits_speech.unsqueeze(0).float(),
                     torch.Tensor(token_int[4:]).unsqueeze(0).long().to(logits_speech.device),
-                    (encoder_out_lens-4).long(),
+                    (encoder_out_lens-4).long()[i],
                     torch.tensor(len(token_int)-4).unsqueeze(0).long().to(logits_speech.device),
                     ignore_id=self.ignore_id,
                 )
