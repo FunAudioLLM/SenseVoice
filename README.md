@@ -245,7 +245,30 @@ fastapi run --port 50000
 git clone https://github.com/alibaba/FunASR.git && cd FunASR
 pip3 install -e ./
 ```
+## 🐳 Docker Support
 
+SenseVoice can be built and run using Docker to simplify setup, ensure reproducibility, and support both CPU and GPU inference.
+
+### Build with Docker
+```bash
+docker build -t sensevoice .
+```
+
+### Run (GPU – default)
+```bash
+docker run --gpus all -p 50000:50000 sensevoice
+```
+### Run (CPU-only)
+```bash
+docker run -e SENSEVOICE_DEVICE=cpu -p 50000:50000 sensevoice
+```
+### Docker Compose
+Docker Compose provides an easier way to run SenseVoice with persistent model caching, networking etc. 
+
+### Start Stack
+```bash
+docker compose up --build
+```
 ### Data prepare
 
 Data examples
