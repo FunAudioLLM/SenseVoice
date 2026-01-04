@@ -896,7 +896,7 @@ class SenseVoiceSmall(nn.Module):
                 align = ctc_forced_align(
                     logits_speech.unsqueeze(0).float(),
                     torch.Tensor(token_int[4:]).unsqueeze(0).long().to(logits_speech.device),
-                    (encoder_out_lens-4).long(),
+                    (encoder_out_lens-4).long()[i],
                     torch.tensor(len(token_int)-4).unsqueeze(0).long().to(logits_speech.device),
                     ignore_id=self.ignore_id,
                 )
@@ -907,7 +907,7 @@ class SenseVoiceSmall(nn.Module):
                 ts_max = encoder_out_lens[i] - 4
                 for pred_token, pred_frame in pred:
                     _end = _start + len(list(pred_frame))
-                    if pred_token != 0:
+                    if pred_token != 0 and token_id < len(tokens):
                         ts_left = max((_start*60-30)/1000, 0)
                         ts_right = min((_end*60-30)/1000, (ts_max*60-30)/1000)
                         timestamp.append([tokens[token_id], ts_left, ts_right])
