@@ -55,6 +55,7 @@ async def turn_audio_to_text(
     files: Annotated[List[UploadFile], File(description="wav or mp3 audios in 16KHz")],
     keys: Annotated[str, Form(description="name of each audio joined with comma")] = None,
     lang: Annotated[Language, Form(description="language of audio content")] = "auto",
+    use_itn: Annotated[bool, Form(description="apply inverse text normalization")] = False,
 ):
     audios = []
     for file in files:
@@ -80,7 +81,7 @@ async def turn_audio_to_text(
     res = m.inference(
         data_in=audios,
         language=lang,  # "zh", "en", "yue", "ja", "ko", "nospeech"
-        use_itn=False,
+        use_itn=use_itn,
         ban_emo_unk=False,
         key=key,
         fs=TARGET_FS,
