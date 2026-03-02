@@ -40,7 +40,7 @@ except:
     tokenizer = None
 
 # inference
-wav_or_scp = "/Users/shixian/Downloads/asr_example_hotword.wav"
+wav_or_scp = os.path.join(model_path, "example", "en.mp3")
 language_list = [0]
 textnorm_list = [15]
 res = model_bin(wav_or_scp, language_list, textnorm_list, tokenizer=tokenizer)
