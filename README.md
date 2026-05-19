@@ -44,6 +44,7 @@ Online Demo:
 
 <a name="What's News"></a>
 # What's New 🔥
+- 2026/05: SenseVoice now supports speaker diarization. Use with `vad_model` + `spk_model` + `punc_model` to get per-sentence speaker labels. Requires installing FunASR from source: `pip install git+https://github.com/modelscope/FunASR.git`
 - 2024/11: Add support for timestamp based on the CTC alignment.
 - 2024/7: Added Export Features for [ONNX](./demo_onnx.py) and [libtorch](./demo_libtorch.py), as well as Python Version Runtimes: [funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/), [funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
 - 2024/7: The [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) voice understanding model is open-sourced, which offers high-precision multilingual speech recognition, emotion recognition, and audio event detection capabilities for Mandarin, Cantonese, English, Japanese, and Korean and leads to exceptionally low inference latency.  
@@ -147,6 +148,41 @@ print(text)
 - `merge_vad`: Whether to merge short audio fragments segmented by the VAD model, with the merged length being `merge_length_s`, in seconds (s).
 - `ban_emo_unk`: Whether to ban the output of the `emo_unk` token.
 </details>
+
+### Speaker Diarization
+
+SenseVoice supports speaker diarization when used with VAD + CAM++ speaker model + punctuation model:
+
+```python
+from funasr import AutoModel
+from funasr.utils.postprocess_utils import rich_transcription_postprocess
+
+model = AutoModel(
+    model="iic/SenseVoiceSmall",
+    trust_remote_code=True,
+    remote_code="./model.py",
+    vad_model="fsmn-vad",
+    vad_kwargs={"max_single_segment_time": 30000},
+    spk_model="cam++",
+    punc_model="ct-punc",
+    device="cuda:0",
+)
+res = model.generate(
+    input="example.wav",
+    cache={},
+    language="auto",
+    use_itn=True,
+    batch_size_s=60,
+    merge_vad=True,
+    merge_length_s=15,
+)
+# Per-sentence results with speaker labels
+for sent in res[0]["sentence_info"]:
+    text = rich_transcription_postprocess(sent["text"])
+    print(f"Speaker {sent['spk']}: [{sent['start']}ms - {sent['end']}ms] {text}")
+```
+
+> Note: Requires installing FunASR from source: `pip install git+https://github.com/modelscope/FunASR.git`
 
 If all inputs are short audios (<30s), and batch inference is needed to speed up inference efficiency, the VAD model can be removed, and `batch_size` can be set accordingly.
 ```python
