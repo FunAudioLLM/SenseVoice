@@ -428,6 +428,17 @@ python webui.py
 - [streaming-sensevoice](https://github.com/pengzhendong/streaming-sensevoice) processes inference in chunks. To achieve pseudo-streaming, it employs a truncated attention mechanism, sacrificing some accuracy. Additionally, this technology supports CTC prefix beam search and hot-word boosting features.
 - [OmniSenseVoice](https://github.com/lifeiteng/OmniSenseVoice) is optimized for lightning-fast inference and batching process. 
 - [SenseVoice Hotword](https://www.modelscope.cn/models/dengcunqin/SenseVoiceSmall_hotword)，Neural Network Hotword Enhancement，[Contextualized End-to-End Speech Recognition with Contextual Phrase Prediction Network](https://mp.weixin.qq.com/s/1QkIvh8j7rrUjRyWOgAvdA)。
+## Ecosystem
+
+SenseVoice is part of the **FunAudioLLM** family:
+
+| Project | Description | Stars |
+|---------|-------------|-------|
+| [FunASR](https://github.com/modelscope/FunASR) | Industrial speech recognition toolkit — VAD, ASR, punctuation, diarization | [![](https://img.shields.io/github/stars/modelscope/FunASR?style=social)](https://github.com/modelscope/FunASR) |
+| [Fun-ASR-Nano](https://github.com/FunAudioLLM/Fun-ASR) | End-to-end LLM-based ASR — 31 languages, streaming, hotwords | [![](https://img.shields.io/github/stars/FunAudioLLM/Fun-ASR?style=social)](https://github.com/FunAudioLLM/Fun-ASR) |
+| [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | Natural speech generation — multi-language, zero-shot cloning | [![](https://img.shields.io/github/stars/FunAudioLLM/CosyVoice?style=social)](https://github.com/FunAudioLLM/CosyVoice) |
+| [FunClip](https://github.com/modelscope/FunClip) | AI-powered video clipping with speech recognition | [![](https://img.shields.io/github/stars/modelscope/FunClip?style=social)](https://github.com/modelscope/FunClip) |
+
 <a name="Community"></a>
 # Community
 If you encounter problems in use, you can directly raise Issues on the github page.
@@ -437,5 +448,13 @@ You can also scan the following DingTalk group QR code to join the community gro
 |                          FunASR                          |
 |:--------------------------------------------------------:|
 | <img src="image/dingding_funasr.png" width="250"/></div> |
+
+<a href="https://star-history.com/#FunAudioLLM/SenseVoice&modelscope/FunASR&FunAudioLLM/Fun-ASR&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=FunAudioLLM/SenseVoice,modelscope/FunASR,FunAudioLLM/Fun-ASR&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=FunAudioLLM/SenseVoice,modelscope/FunASR,FunAudioLLM/Fun-ASR&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=FunAudioLLM/SenseVoice,modelscope/FunASR,FunAudioLLM/Fun-ASR&type=Date" />
+  </picture>
+</a>
 
 
