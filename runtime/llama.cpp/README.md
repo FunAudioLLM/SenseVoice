@@ -100,3 +100,7 @@ detok.py                  SentencePiece id → text (bpe model ships with the ch
 ## Roadmap
 - Built-in SentencePiece detok (drop the Python step); arbitrary WAV formats;
   encoder Q8 quantization; timestamps.
+
+## Further reading
+
+See [DESIGN.md](DESIGN.md) for the full system design — architecture, the shared SAN-M encoder, GGUF weight format, numerical-fidelity and validation methodology, design trade-offs, and gotchas.
