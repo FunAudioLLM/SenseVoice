@@ -43,6 +43,7 @@ is shared between the two runtimes.
 **1. Build:**
 ```bash
 git clone https://github.com/ggml-org/llama.cpp && cd llama.cpp
+cp -r /path/to/runtime/llama.cpp/funasr-common examples/   # shared audio loader (miniaudio); each example CMake adds ../funasr-common
 cp -r /path/to/runtime/llama.cpp/funasr-sensevoice examples/
 echo 'add_subdirectory(funasr-sensevoice)' >> examples/CMakeLists.txt
 cmake -B build -DGGML_NATIVE=ON -DLLAMA_CURL=OFF
