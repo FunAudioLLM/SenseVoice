@@ -265,6 +265,8 @@ print([rich_transcription_postprocess(i) for i in res])
 Note: Libtorch model is exported to the original model directory.
 </details>
 
+> **CPU / edge (no GPU, no Python):** run SenseVoice as a single self-contained binary via **llama.cpp / GGUF** (official, validated CTC ids identical to PyTorch). See [runtime/llama.cpp/](runtime/llama.cpp/).
+
 ## Service
 
 ### Deployment with FastAPI
