@@ -38,6 +38,19 @@ The whole pipeline runs in C++:
 The SAN-M encoder is the same architecture as Fun-ASR-Nano's, so the ggml forward
 is shared between the two runtimes.
 
+## Download pre-built GGUF (fastest — no Python ML env)
+```bash
+./download-funasr-model.sh sensevoice          # pulls SenseVoice + fsmn-vad GGUF from Hugging Face
+llama-funasr-sensevoice -m funasr-gguf/sensevoice-small-f16.gguf \
+    -a audio.wav --vad funasr-gguf/fsmn-vad.gguf > ids.txt
+```
+Pre-converted GGUF: [FunAudioLLM/SenseVoiceSmall-GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · [fsmn-vad-GGUF](https://huggingface.co/FunAudioLLM/fsmn-vad-GGUF). Or convert yourself: `python convert-funasr-to-gguf.py sensevoice --wtype f16`.
+
+## Build (standalone, CI-friendly)
+```bash
+cmake -B build -DCMAKE_BUILD_TYPE=Release      # fetches pinned llama.cpp; static, self-contained
+cmake --build build -j                          # -> build/bin/llama-funasr-*
+```
 ## Quickstart
 
 **1. Build:**
