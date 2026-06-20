@@ -71,6 +71,17 @@ Expected output:
 ```
 The leading `<|...|>` tags are the predicted language / emotion / event / ITN.
 
+**4. Long audio — built-in FSMN-VAD (no Python front end):**
+```bash
+python runtime/llama.cpp/export_vad_gguf.py \
+    --model_pt <fsmn-vad>/model.pt --mvn <fsmn-vad>/am.mvn --out fsmn-vad.gguf
+build/bin/llama-funasr-sensevoice -m sensevoice-small.gguf -a long.wav \
+    --vad fsmn-vad.gguf > ids.txt          # segments internally, then concatenates
+```
+The runtime then needs **no Python for segmentation** — it runs FSMN-VAD (native ggml)
+inside the binary and decodes each speech segment. Segment boundaries match the PyTorch
+`fsmn-vad` front end within ~10 ms; see [BENCHMARKS.md](BENCHMARKS.md) for full-184 numbers.
+
 ## Accuracy & validation
 
 - **CTC token ids (C++) vs PyTorch:** **identical** (108/108 on a benchmark clip).
@@ -95,6 +106,8 @@ The leading `<|...|>` tags are the predicted language / emotion / event / ITN.
 funasr-sensevoice/        ggml runtime: WAV → CTC token ids
 export_sensevoice_gguf.py export encoder + CTC head + query embeddings to GGUF
 detok.py                  SentencePiece id → text (bpe model ships with the checkpoint)
+funasr-vad/               built-in FSMN-VAD tool + --vad library (funasr-common/funasr_vad.h)
+export_vad_gguf.py        export FSMN-VAD encoder + CMVN to GGUF
 ```
 
 ## Roadmap
