@@ -42,7 +42,7 @@ is shared between the two runtimes.
 ```bash
 ./download-funasr-model.sh sensevoice          # pulls SenseVoice + fsmn-vad GGUF from Hugging Face
 llama-funasr-sensevoice -m funasr-gguf/sensevoice-small-f16.gguf \
-    -a audio.wav --vad funasr-gguf/fsmn-vad.gguf > ids.txt
+    -a audio.wav --vad funasr-gguf/fsmn-vad.gguf
 ```
 Pre-converted GGUF: [FunAudioLLM/SenseVoiceSmall-GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · [fsmn-vad-GGUF](https://huggingface.co/FunAudioLLM/fsmn-vad-GGUF). Or convert yourself: `python convert-funasr-to-gguf.py sensevoice --wtype f16`.
 
@@ -75,13 +75,12 @@ python runtime/llama.cpp/export_sensevoice_gguf.py --wtype f16 \
 
 **3. Transcribe:**
 ```bash
-build/bin/llama-funasr-sensevoice -m sensevoice-small.gguf -a audio.wav > ids.txt
-python runtime/llama.cpp/detok.py <model>/chn_jpn_yue_eng_ko_spectok.bpe.model ids.txt
+build/bin/llama-funasr-sensevoice -m sensevoice-small.gguf -a audio.wav   # prints transcription text
+# --keep-tags keeps the <|lang|>/<|emotion|>/<|event|> tags; --ids prints raw CTC ids
 ```
 Expected output:
 ```
-<|zh|><|NEUTRAL|><|Speech|><|woitn|>我想问我在滨海新区有房我一直没有照顾孩子...你觉得这是正常的想法吗
-[sensevoice] N=746 (q4+T742) encode 1.32s
+我想问我在滨海新区有房我一直没有照顾孩子...你觉得这是正常的想法吗
 ```
 The leading `<|...|>` tags are the predicted language / emotion / event / ITN.
 
@@ -90,7 +89,7 @@ The leading `<|...|>` tags are the predicted language / emotion / event / ITN.
 python runtime/llama.cpp/export_vad_gguf.py \
     --model_pt <fsmn-vad>/model.pt --mvn <fsmn-vad>/am.mvn --out fsmn-vad.gguf
 build/bin/llama-funasr-sensevoice -m sensevoice-small.gguf -a long.wav \
-    --vad fsmn-vad.gguf > ids.txt          # segments internally, then concatenates
+    --vad fsmn-vad.gguf          # segments internally, then concatenates
 ```
 The runtime then needs **no Python for segmentation** — it runs FSMN-VAD (native ggml)
 inside the binary and decodes each speech segment. Segment boundaries match the PyTorch
