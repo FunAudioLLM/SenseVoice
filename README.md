@@ -265,7 +265,16 @@ print([rich_transcription_postprocess(i) for i in res])
 Note: Libtorch model is exported to the original model directory.
 </details>
 
-> **CPU / edge (no GPU, no Python):** run SenseVoice as a single self-contained binary via **llama.cpp / GGUF** (official, validated CTC ids identical to PyTorch). See [runtime/llama.cpp/](runtime/llama.cpp/).
+### Run on CPU / edge — llama.cpp / GGUF (no GPU, no Python)
+
+Run SenseVoice as a **single self-contained binary** — this is to SenseVoice what [whisper.cpp](https://github.com/ggml-org/whisper.cpp) is to Whisper, but with far stronger Chinese & Cantonese accuracy. Built-in FSMN-VAD, no Python at runtime.
+
+```bash
+bash download-funasr-model.sh sensevoice ./gguf
+llama-funasr-sensevoice -m ./gguf/SenseVoiceSmall-f16.gguf --vad ./gguf/fsmn-vad.gguf -a audio.wav
+```
+
+**Prebuilt binaries:** [Releases](../../releases) · **Download & quickstart:** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF:** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **Docs & benchmarks:** [runtime/llama.cpp/](./runtime/llama.cpp/)
 
 ## Service
 
