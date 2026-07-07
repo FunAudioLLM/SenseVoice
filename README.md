@@ -290,7 +290,7 @@ fastapi run --port 50000
 ### Requirements
 
 ```shell
-git clone https://github.com/alibaba/FunASR.git && cd FunASR
+git clone https://github.com/modelscope/FunASR.git && cd FunASR
 pip3 install -e ./
 ```
 ## 🐳 Docker Support
