@@ -1,5 +1,7 @@
-torch<=2.3
-torchaudio
+# Keep the default install outside known Dependabot torch alert ranges.
+# For CUDA-specific wheels, install a matching torch/torchaudio pair first.
+torch>=2.12.1
+torchaudio>=2.11.0
 modelscope
 huggingface
 huggingface_hub
