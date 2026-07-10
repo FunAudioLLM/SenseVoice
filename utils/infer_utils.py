@@ -358,7 +358,7 @@ def read_yaml(yaml_path: Union[str, Path]) -> Dict:
         raise FileExistsError(f"The {yaml_path} does not exist.")
 
     with open(str(yaml_path), "rb") as f:
-        data = yaml.load(f, Loader=yaml.Loader)
+        data = yaml.load(f, Loader=yaml.SafeLoader)
     return data
 
 
