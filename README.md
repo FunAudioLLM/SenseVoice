@@ -461,12 +461,11 @@ You can also scan the following DingTalk group QR code to join the community gro
 |:--------------------------------------------------------:|
 | <img src="image/dingding_funasr.png" width="250"/></div> |
 
-<a href="https://star-history.com/#FunAudioLLM/SenseVoice&modelscope/FunASR&FunAudioLLM/Fun-ASR&Date">
+<a href="https://www.star-history.com/FunAudioLLM/SenseVoice">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=FunAudioLLM/SenseVoice,modelscope/FunASR,FunAudioLLM/Fun-ASR&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=FunAudioLLM/SenseVoice,modelscope/FunASR,FunAudioLLM/Fun-ASR&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=FunAudioLLM/SenseVoice,modelscope/FunASR,FunAudioLLM/Fun-ASR&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/badge?repo=FunAudioLLM/SenseVoice&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/badge?repo=FunAudioLLM/SenseVoice" />
+    <img alt="Star History Rank" src="https://api.star-history.com/badge?repo=FunAudioLLM/SenseVoice" />
   </picture>
 </a>
-
 
