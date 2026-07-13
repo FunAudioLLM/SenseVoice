@@ -253,8 +253,8 @@ print([rich_transcription_postprocess (i) for i in res])
 SenseVoice 可以作为**单个自包含二进制**运行。这个路径类似 Whisper 的 whisper.cpp，但在中文与粤语场景下更适合 SenseVoice；运行时内置 FSMN-VAD，无需 Python 环境。
 
 ```bash
-bash download-funasr-model.sh sensevoice ./gguf
-llama-funasr-sensevoice -m ./gguf/SenseVoiceSmall-f16.gguf --vad ./gguf/fsmn-vad.gguf -a audio.wav
+bash runtime/llama.cpp/download-funasr-model.sh sensevoice ./gguf
+llama-funasr-sensevoice -m ./gguf/sensevoice-small-f16.gguf --vad ./gguf/fsmn-vad.gguf -a audio.wav
 ```
 
 **预编译二进制：** [Releases](../../releases) · **下载与快速开始：** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF 模型：** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **文档与 benchmark：** [runtime/llama.cpp/](./runtime/llama.cpp/)
