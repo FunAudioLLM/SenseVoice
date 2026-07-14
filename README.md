@@ -30,22 +30,24 @@ Online Demo:
 
 </div>
 
+> **Released checkpoint scope:** SenseVoiceSmall supports ASR and language ID for Mandarin, Cantonese, English, Japanese, and Korean, together with emotion and audio-event tags. Speaker diarization is a composed FunASR pipeline using separate FSMN-VAD and CAM++ models; it is not an output of the SenseVoiceSmall checkpoint itself.
+
 
 <a name="Highligts"></a>
 # Highlights 🎯
 **SenseVoice** focuses on high-accuracy multilingual speech recognition, speech emotion recognition, and audio event detection.
-- **Multilingual Speech Recognition:** Trained with over 400,000 hours of data, supporting more than 50 languages, the recognition performance surpasses that of the Whisper model.
+- **Research scope vs released checkpoint:** The broader SenseVoice work reports training on more than 400,000 hours and support for more than 50 languages. The released SenseVoiceSmall checkpoint linked above supports Mandarin, Cantonese, English, Japanese, and Korean; the benchmark comparisons below are task- and language-specific.
 - **Rich transcribe:** 
   - Possess excellent emotion recognition capabilities, achieving and surpassing the effectiveness of the current best emotion recognition models on test data.
   - Offer sound event detection capabilities, supporting the detection of various common human-computer interaction events such as bgm, applause, laughter, crying, coughing, and sneezing.
-- **Efficient Inference:** The SenseVoice-Small model utilizes a non-autoregressive end-to-end framework, leading to exceptionally low inference latency. It requires only 70ms to process 10 seconds of audio, which is 15 times faster than Whisper-Large.
+- **Efficient Inference:** SenseVoiceSmall uses a non-autoregressive end-to-end framework for low-latency inference; see the benchmark setup and comparison below.
 - **Convenient Finetuning:** Provide convenient finetuning scripts and strategies, allowing users to easily address long-tail sample issues according to their business scenarios.
 - **Service Deployment:** Offer service deployment pipeline,  supporting multi-concurrent requests, with client-side languages including Python, C++, HTML, Java, and C#, among others.
 
 <a name="What's News"></a>
 # What's New 🔥
 - 2026/06: **SenseVoice on llama.cpp / GGUF** — run it on CPU/edge as a single self-contained binary (whisper.cpp-style), built-in VAD, no Python at runtime. The q8 model is only ~254 MB with the same accuracy. [runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](../../releases) · [GGUF on Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
-- 2026/05: SenseVoice now supports speaker diarization. Use with `vad_model` + `spk_model` + `punc_model` to get per-sentence speaker labels. Requires installing FunASR from source: `pip install git+https://github.com/modelscope/FunASR.git`
+- 2026/05: FunASR can compose SenseVoiceSmall with separate FSMN-VAD, CAM++, and punctuation models to produce per-sentence speaker labels. Diarization is not a native SenseVoiceSmall checkpoint output. Requires installing FunASR from source: `pip install git+https://github.com/modelscope/FunASR.git`
 - 2024/11: Add support for timestamp based on the CTC alignment.
 - 2024/7: Added Export Features for [ONNX](./demo_onnx.py) and [libtorch](./demo_libtorch.py), as well as Python Version Runtimes: [funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/), [funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
 - 2024/7: The [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) voice understanding model is open-sourced, which offers high-precision multilingual speech recognition, emotion recognition, and audio event detection capabilities for Mandarin, Cantonese, English, Japanese, and Korean and leads to exceptionally low inference latency.  
@@ -86,7 +88,7 @@ Although trained exclusively on speech data, SenseVoice can still function as a 
 
 ## Computational  Efficiency
 
-The SenseVoice-Small model deploys a non-autoregressive end-to-end architecture, resulting in extremely low inference latency. With a similar number of parameters to the Whisper-Small model, it infers more than 5 times faster than Whisper-Small and 15 times faster than Whisper-Large. 
+In the benchmark setup shown below, SenseVoiceSmall uses a non-autoregressive end-to-end architecture and, at a similar parameter count, runs more than 5 times faster than Whisper-Small and 15 times faster than Whisper-Large.
 
 <div align="center">  
 <img src="image/inference.png" width="1000" />
@@ -152,7 +154,7 @@ print(text)
 
 ### Speaker Diarization
 
-SenseVoice supports speaker diarization when used with VAD + CAM++ speaker model + punctuation model:
+This example composes SenseVoiceSmall with separate FSMN-VAD, CAM++, and punctuation models through FunASR. CAM++ provides the speaker labels; the SenseVoiceSmall checkpoint itself does not:
 
 ```python
 from funasr import AutoModel
@@ -447,7 +449,7 @@ SenseVoice is part of the **FunAudioLLM** family:
 | Project | Description | Stars |
 |---------|-------------|-------|
 | [FunASR](https://github.com/modelscope/FunASR) | Industrial speech recognition toolkit — VAD, ASR, punctuation, diarization | [![](https://img.shields.io/github/stars/modelscope/FunASR?style=social)](https://github.com/modelscope/FunASR) |
-| [Fun-ASR-Nano](https://github.com/FunAudioLLM/Fun-ASR) | End-to-end LLM-based ASR — 31 languages, streaming, hotwords | [![](https://img.shields.io/github/stars/FunAudioLLM/Fun-ASR?style=social)](https://github.com/FunAudioLLM/Fun-ASR) |
+| [Fun-ASR](https://github.com/FunAudioLLM/Fun-ASR) | LLM-based ASR family — Nano for zh/en/ja + Chinese dialects; MLT-Nano for 31 languages | [![](https://img.shields.io/github/stars/FunAudioLLM/Fun-ASR?style=social)](https://github.com/FunAudioLLM/Fun-ASR) |
 | [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | Natural speech generation — multi-language, zero-shot cloning | [![](https://img.shields.io/github/stars/FunAudioLLM/CosyVoice?style=social)](https://github.com/FunAudioLLM/CosyVoice) |
 | [FunClip](https://github.com/modelscope/FunClip) | AI-powered video clipping with speech recognition | [![](https://img.shields.io/github/stars/modelscope/FunClip?style=social)](https://github.com/modelscope/FunClip) |
 

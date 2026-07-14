@@ -26,17 +26,19 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 </div>
 
+> **已发布 checkpoint 范围：** SenseVoiceSmall 支持中文、粤语、英文、日文和韩文的 ASR 与语种识别，并输出情感和音频事件标签。说话人分离是 FunASR 组合独立 FSMN-VAD 与 CAM++ 的 pipeline 能力，并非 SenseVoiceSmall checkpoint 本身的输出。
+
 <a name="核心功能"></a>
 
 # 核心功能 🎯
 
-**SenseVoice** 专注于高精度多语言语音识别、情感辨识和音频事件检测
+**SenseVoice** 专注于高精度多语言语音识别、情感辨识和音频事件检测。
 
-- **多语言识别：** 采用超过 40 万小时数据训练，支持超过 50 种语言，识别效果上优于 Whisper 模型。
+- **研究范围与已发布 checkpoint：** 更广泛的 SenseVoice 研究描述采用超过 40 万小时数据训练并覆盖 50 多种语言；当前公开的 SenseVoiceSmall checkpoint 支持中文、粤语、英文、日文和韩文，下面的 benchmark 对比仅对应所列任务与语种。
 - **富文本识别：**
   - 具备优秀的情感识别，能够在测试数据上达到和超过目前最佳情感识别模型的效果。
   - 支持声音事件检测能力，支持音乐、掌声、笑声、哭声、咳嗽、喷嚏等多种常见人机交互事件进行检测。
-- **高效推理：** SenseVoice-Small 模型采用非自回归端到端框架，推理延迟极低，10s 音频推理仅耗时 70ms，15 倍优于 Whisper-Large。
+- **高效推理：** SenseVoiceSmall 采用非自回归端到端框架，具有低延迟推理能力；具体测试条件与速度对比见下方 benchmark。
 - **微调定制：** 具备便捷的微调脚本与策略，方便用户根据业务场景修复长尾样本问题。
 - **服务部署：** 具有完整的服务部署链路，支持多并发请求，支持客户端语言有，python、c++、html、java 与 c# 等。
 
@@ -45,7 +47,7 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 # 最新动态 🔥
 
 - 2026/06: **SenseVoice 支持 llama.cpp / GGUF**，可在 CPU/边缘端以单个自包含二进制运行（类似 whisper.cpp），内置 VAD，运行时无需 Python。q8 模型约 254 MB，精度保持一致。[runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](../../releases) · [Hugging Face GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
-- 2026/05: SenseVoice 现已支持说话人分离。配合 `vad_model` + `spk_model` + `punc_model` 使用，可获得带说话人标签的逐句结果。需从源码安装 FunASR：`pip install git+https://github.com/modelscope/FunASR.git`
+- 2026/05: FunASR 可将 SenseVoiceSmall 与独立的 FSMN-VAD、CAM++ 和标点模型组合，生成逐句说话人标签；说话人分离并非 SenseVoiceSmall checkpoint 的原生输出。需从源码安装 FunASR：`pip install git+https://github.com/modelscope/FunASR.git`
 - 2024/7：新增加导出 [ONNX](./demo_onnx.py) 与 [libtorch](./demo_libtorch.py) 功能，以及 python 版本 runtime：[funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/)，[funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
 - 2024/7: [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) 多语言音频理解模型开源，支持中、粤、英、日、韩语的多语言语音识别，情感识别和事件检测能力，具有极低的推理延迟。。
 - 2024/7: CosyVoice 致力于自然语音生成，支持多语言、音色和情感控制，擅长多语言语音生成、零样本语音生成、跨语言语音克隆以及遵循指令的能力。[CosyVoice repo](https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice 在线体验](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
@@ -87,7 +89,7 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 ## 推理效率
 
-SenseVoice-small 模型采用非自回归端到端架构，推理延迟极低。在参数量与 Whisper-Small 模型相当的情况下，比 Whisper-Small 模型推理速度快 5 倍，比 Whisper-Large 模型快 15 倍。同时 SenseVoice-small 模型在音频时长增加的情况下，推理耗时也无明显增加。
+在下图所示 benchmark 设置中，SenseVoiceSmall 采用非自回归端到端架构；在参数量与 Whisper-Small 相当的情况下，其推理速度比 Whisper-Small 快 5 倍以上，比 Whisper-Large 快 15 倍。
 
 <div align="center">  
 <img src="image/inference.png" width="1000" />
