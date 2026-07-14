@@ -409,6 +409,12 @@ python webui.py
 - [流式SenseVoice](https://github.com/pengzhendong/streaming-sensevoice)，通过分块（chunk）的方式进行推理，为了实现伪流式处理，采用了截断注意力机制（truncated attention），牺牲了部分精度。此外，该技术还支持CTC前缀束搜索（CTC prefix beam search）以及热词增强功能。
 - [OmniSenseVoice](https://github.com/lifeiteng/OmniSenseVoice) 轻量化推理库，支持batch推理。
 - [SenseVoice Hotword](https://www.modelscope.cn/models/dengcunqin/SenseVoiceSmall_hotword)，神经网络热词增强，[WeNet 中开源基于 CPPN 的神经网络热词增强](https://mp.weixin.qq.com/s/1QkIvh8j7rrUjRyWOgAvdA)。
+
+## 许可证
+
+- 本仓库源码采用 [MIT License](./LICENSE)。
+- 模型权重单独发布，并以各模型卡标注的条款为准。官方 [SenseVoiceSmall 模型卡](https://huggingface.co/FunAudioLLM/SenseVoiceSmall) 链接至 [FunASR 模型开源协议](https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE)；其他制品和转换版本可能标注不同条款，使用前请核对对应模型卡。
+
 # 联系我们
 
 如果您在使用中遇到问题，可以直接在 github 页面提 Issues。欢迎语音兴趣爱好者扫描以下的钉钉群二维码加入社区群，进行交流和讨论。
