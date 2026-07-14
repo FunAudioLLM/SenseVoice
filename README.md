@@ -451,6 +451,11 @@ SenseVoice is part of the **FunAudioLLM** family:
 | [CosyVoice](https://github.com/FunAudioLLM/CosyVoice) | Natural speech generation — multi-language, zero-shot cloning | [![](https://img.shields.io/github/stars/FunAudioLLM/CosyVoice?style=social)](https://github.com/FunAudioLLM/CosyVoice) |
 | [FunClip](https://github.com/modelscope/FunClip) | AI-powered video clipping with speech recognition | [![](https://img.shields.io/github/stars/modelscope/FunClip?style=social)](https://github.com/modelscope/FunClip) |
 
+## License
+
+- Source code in this repository is licensed under the [MIT License](./LICENSE).
+- Model weights are distributed separately and follow the terms on each model card. The official [SenseVoiceSmall model card](https://huggingface.co/FunAudioLLM/SenseVoiceSmall) links to the [FunASR Model Open Source License Agreement](https://github.com/modelscope/FunASR/blob/main/MODEL_LICENSE); other artifacts and conversions may list different terms, so check their model cards before use.
+
 <a name="Community"></a>
 # Community
 If you encounter problems in use, you can directly raise Issues on the github page.
@@ -468,4 +473,3 @@ You can also scan the following DingTalk group QR code to join the community gro
     <img alt="Star History Rank" src="https://api.star-history.com/badge?repo=FunAudioLLM/SenseVoice" />
   </picture>
 </a>
-
