@@ -19,7 +19,7 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 </h4>
 
-模型仓库：[modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall)，[huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)
+模型仓库：[modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall)，[huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)，[论文](https://arxiv.org/abs/2407.04051)
 
 在线体验：
 [modelscope demo](https://www.modelscope.cn/studios/iic/SenseVoice), [huggingface space](https://huggingface.co/spaces/FunAudioLLM/SenseVoice)
