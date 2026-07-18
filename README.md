@@ -22,7 +22,7 @@ SenseVoice is a speech foundation model with multiple speech understanding capab
 </h4>
 
 Model Zoo:
-[modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall), [huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall)
+[modelscope](https://www.modelscope.cn/models/iic/SenseVoiceSmall), [huggingface](https://huggingface.co/FunAudioLLM/SenseVoiceSmall), [paper](https://arxiv.org/abs/2407.04051)
 
 Online Demo:
 [modelscope demo](https://www.modelscope.cn/studios/iic/SenseVoice), [huggingface space](https://huggingface.co/spaces/FunAudioLLM/SenseVoice)
