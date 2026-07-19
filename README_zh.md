@@ -103,6 +103,8 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 pip install -r requirements.txt
 ```
 
+SenseVoiceSmall 示例与 FunASR 组合说话人分离路径需要 `funasr>=1.3.19`。如果你之前已经安装过本仓库，请先执行 `pip install -U "funasr>=1.3.19"`，再重新运行 demo。
+
 <a name="用法教程"></a>
 
 # 用法 🛠️
