@@ -101,7 +101,7 @@ In the benchmark setup shown below, SenseVoiceSmall uses a non-autoregressive en
 pip install -r requirements.txt
 ```
 
-SenseVoiceSmall examples and the composed FunASR diarization path require `funasr>=1.3.23`. If you installed this repository earlier, run `pip install -U "funasr>=1.3.23"` before retrying the demos.
+SenseVoiceSmall examples and the composed FunASR diarization path require `funasr>=1.3.24`. If you installed this repository earlier, run `pip install -U "funasr>=1.3.24"` before retrying the demos.
 
 <a name="Usage"></a>
 # Usage
