@@ -46,7 +46,7 @@ Online Demo:
 
 <a name="What's News"></a>
 # What's New 🔥
-- 2026/06: **SenseVoice on llama.cpp / GGUF** — run it on CPU/edge as a single self-contained binary (whisper.cpp-style), built-in VAD, no Python at runtime. The q8 model is only ~254 MB with the same accuracy. [runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](../../releases) · [GGUF on Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
+- 2026/06: **SenseVoice on llama.cpp / GGUF** — run it on CPU/edge as a single self-contained binary (whisper.cpp-style), built-in VAD, no Python at runtime. The q8 model is only ~254 MB with the same accuracy. [runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](https://github.com/FunAudioLLM/SenseVoice/releases) · [GGUF on Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
 - 2026/05: FunASR can compose SenseVoiceSmall with separate FSMN-VAD, CAM++, and punctuation models to produce per-sentence speaker labels. Diarization is not a native SenseVoiceSmall checkpoint output. Requires installing FunASR from source: `pip install git+https://github.com/modelscope/FunASR.git`
 - 2024/11: Add support for timestamp based on the CTC alignment.
 - 2024/7: Added Export Features for [ONNX](./demo_onnx.py) and [libtorch](./demo_libtorch.py), as well as Python Version Runtimes: [funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/), [funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
@@ -279,7 +279,7 @@ bash runtime/llama.cpp/download-funasr-model.sh sensevoice ./gguf
 llama-funasr-sensevoice -m ./gguf/sensevoice-small-f16.gguf --vad ./gguf/fsmn-vad.gguf -a audio.wav
 ```
 
-**Prebuilt binaries:** [Releases](../../releases) · **Download & quickstart:** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF:** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **Docs & benchmarks:** [runtime/llama.cpp/](./runtime/llama.cpp/)
+**Prebuilt binaries:** [Releases](https://github.com/FunAudioLLM/SenseVoice/releases) · **Download & quickstart:** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF:** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **Docs & benchmarks:** [runtime/llama.cpp/](./runtime/llama.cpp/)
 
 ## Service
 

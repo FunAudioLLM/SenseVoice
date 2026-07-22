@@ -46,7 +46,7 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 # 最新动态 🔥
 
-- 2026/06: **SenseVoice 支持 llama.cpp / GGUF**，可在 CPU/边缘端以单个自包含二进制运行（类似 whisper.cpp），内置 VAD，运行时无需 Python。q8 模型约 254 MB，精度保持一致。[runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](../../releases) · [Hugging Face GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
+- 2026/06: **SenseVoice 支持 llama.cpp / GGUF**，可在 CPU/边缘端以单个自包含二进制运行（类似 whisper.cpp），内置 VAD，运行时无需 Python。q8 模型约 254 MB，精度保持一致。[runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](https://github.com/FunAudioLLM/SenseVoice/releases) · [Hugging Face GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
 - 2026/05: FunASR 可将 SenseVoiceSmall 与独立的 FSMN-VAD、CAM++ 和标点模型组合，生成逐句说话人标签；说话人分离并非 SenseVoiceSmall checkpoint 的原生输出。需从源码安装 FunASR：`pip install git+https://github.com/modelscope/FunASR.git`
 - 2024/7：新增加导出 [ONNX](./demo_onnx.py) 与 [libtorch](./demo_libtorch.py) 功能，以及 python 版本 runtime：[funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/)，[funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
 - 2024/7: [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) 多语言音频理解模型开源，支持中、粤、英、日、韩语的多语言语音识别，情感识别和事件检测能力，具有极低的推理延迟。。
@@ -261,7 +261,7 @@ bash runtime/llama.cpp/download-funasr-model.sh sensevoice ./gguf
 llama-funasr-sensevoice -m ./gguf/sensevoice-small-f16.gguf --vad ./gguf/fsmn-vad.gguf -a audio.wav
 ```
 
-**预编译二进制：** [Releases](../../releases) · **下载与快速开始：** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF 模型：** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **文档与 benchmark：** [runtime/llama.cpp/](./runtime/llama.cpp/)
+**预编译二进制：** [Releases](https://github.com/FunAudioLLM/SenseVoice/releases) · **下载与快速开始：** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF 模型：** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **文档与 benchmark：** [runtime/llama.cpp/](./runtime/llama.cpp/)
 
 ### 部署
 

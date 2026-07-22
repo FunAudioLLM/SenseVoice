@@ -1,4 +1,6 @@
+import re
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,3 +16,18 @@ def test_readmes_explain_upgrade_for_existing_installs():
     for readme in ["README.md", "README_zh.md", "README_ja.md"]:
         text = (ROOT / readme).read_text()
         assert 'pip install -U "funasr>=1.3.23"' in text
+
+
+def test_readme_relative_markdown_links_point_to_existing_files():
+    link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+    for relpath in ["README.md", "README_zh.md"]:
+        readme_path = ROOT / relpath
+        for target in link_pattern.findall(readme_path.read_text()):
+            parsed = urlparse(target)
+            if parsed.scheme or parsed.netloc or target.startswith("#"):
+                continue
+            link_path = unquote(parsed.path)
+            if not link_path or link_path.startswith("#"):
+                continue
+            resolved = (readme_path.parent / link_path).resolve()
+            assert resolved.exists(), f"{relpath} links to missing file: {target}"
