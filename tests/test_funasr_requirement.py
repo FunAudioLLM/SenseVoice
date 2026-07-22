@@ -20,6 +20,17 @@ def test_readmes_explain_upgrade_for_existing_installs():
         assert "funasr>=1.3.23" not in text
 
 
+def test_readmes_surface_sensevoice_gguf_edge_path():
+    required_links = [
+        "https://www.funasr.com/llama-cpp.html",
+        "https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF",
+    ]
+    for readme in ["README.md", "README_zh.md", "README_ja.md"]:
+        text = (ROOT / readme).read_text()
+        for link in required_links:
+            assert link in text
+
+
 def test_readme_relative_markdown_links_point_to_existing_files():
     link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
     for relpath in ["README.md", "README_zh.md"]:
