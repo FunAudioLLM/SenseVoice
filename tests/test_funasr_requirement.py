@@ -31,6 +31,23 @@ def test_readmes_surface_sensevoice_gguf_edge_path():
             assert link in text
 
 
+def test_readmes_surface_funasr_1327_language_metadata_release():
+    required = [
+        "funasr==1.3.27",
+        "verbose_json.language",
+        "https://github.com/modelscope/FunASR/releases/tag/v1.3.27",
+    ]
+    guides = {
+        "README.md": "https://www.funasr.com/en/blog/funasr-v1-3-27-language-metadata-vllm-fallback.html",
+        "README_zh.md": "https://www.funasr.com/blog/funasr-v1-3-27-language-metadata-vllm-fallback.html",
+        "README_ja.md": "https://www.funasr.com/en/blog/funasr-v1-3-27-language-metadata-vllm-fallback.html",
+    }
+    for relpath, guide in guides.items():
+        text = (ROOT / relpath).read_text()
+        for marker in [*required, guide]:
+            assert marker in text, f"{relpath} is missing {marker}"
+
+
 def test_readme_relative_markdown_links_point_to_existing_files():
     link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
     for relpath in ["README.md", "README_zh.md"]:
