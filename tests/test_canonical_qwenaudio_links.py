@@ -72,3 +72,22 @@ def test_tracked_files_use_qwenaudio_for_canonical_github_repositories():
             offenders.append(str(path.relative_to(ROOT)))
 
     assert not offenders, "legacy GitHub repository owner in: " + ", ".join(offenders)
+
+
+def test_readme_homepage_links_use_live_funasr_site():
+    targets = {
+        "README.md": "https://www.funasr.com/en/",
+        "README_zh.md": "https://www.funasr.com/",
+        "README_ja.md": "https://www.funasr.com/en/",
+    }
+    for relpath, target in targets.items():
+        text = (ROOT / relpath).read_text(encoding="utf-8")
+        assert f'href="{target}"' in text, f"{relpath} is missing {target}"
+
+    offenders = []
+    for path, text in _tracked_text_files():
+        if path.resolve() == Path(__file__).resolve():
+            continue
+        if "funaudiollm.github.io" in text:
+            offenders.append(str(path.relative_to(ROOT)))
+    assert not offenders, "retired homepage domain in: " + ", ".join(offenders)
