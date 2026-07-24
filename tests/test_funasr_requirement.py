@@ -48,6 +48,20 @@ def test_readmes_surface_funasr_1327_language_metadata_release():
             assert marker in text, f"{relpath} is missing {marker}"
 
 
+def test_readmes_surface_funasr_1329_vad_sentence_timestamps():
+    required = [
+        "funasr==1.3.29",
+        "sentence_info",
+        "VAD",
+        "https://github.com/modelscope/FunASR/releases/tag/v1.3.29",
+        "https://pypi.org/project/funasr/1.3.29/",
+    ]
+    for relpath in ["README.md", "README_zh.md", "README_ja.md"]:
+        text = (ROOT / relpath).read_text()
+        for marker in required:
+            assert marker in text, f"{relpath} is missing {marker}"
+
+
 def test_readme_relative_markdown_links_point_to_existing_files():
     link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
     for relpath in ["README.md", "README_zh.md"]:

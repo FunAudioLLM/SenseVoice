@@ -46,7 +46,7 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 # 最新动态 🔥
 
-- 2026/07：**FunASR 1.3.28 改善 SenseVoice 字幕对齐** — 实时会话会在 VAD 锁定后的最终解码发生退化时保留稳定文本，并在收到 `STOP` 后解码短尾语音，减少末尾字幕丢失或错位。安装命令：`pip install -U "funasr==1.3.28"`。[发布说明](https://github.com/modelscope/FunASR/releases/tag/v1.3.28) · [字幕指南](https://www.funasr.com/blog/funasr-v1-3-28-realtime-websocket-subtitles.html) · [PyPI](https://pypi.org/project/funasr/1.3.28/)
+- 2026/07：**FunASR 1.3.29 恢复 SenseVoice 的 VAD 分段时间戳** — 当模型没有 token 时间戳且未配置标点模型时，`sentence_timestamp=True` 现在会通过 `sentence_info` 返回每个 VAD 语音区域，让字幕与智能剪辑客户端获得可用的分段边界，而不再收到空时间线。安装命令：`pip install -U "funasr==1.3.29"`。[发布说明](https://github.com/modelscope/FunASR/releases/tag/v1.3.29) · [PyPI](https://pypi.org/project/funasr/1.3.29/)
 - 2026/07：**FunASR 1.3.27 为 SenseVoice 增加检测语种元数据** — OpenAI 兼容接口现在会在 `verbose_json.language` 中返回检测到的 `zh`、`en`、`yue`、`ja` 或 `ko`。安装命令：`pip install -U "funasr==1.3.27"`。[发布说明](https://github.com/modelscope/FunASR/releases/tag/v1.3.27) · [接口指南](https://www.funasr.com/blog/funasr-v1-3-27-language-metadata-vllm-fallback.html) · [PyPI](https://pypi.org/project/funasr/1.3.27/)
 - 2026/06: **SenseVoice 支持 llama.cpp / GGUF**，可在 CPU/边缘端以单个自包含二进制运行（类似 whisper.cpp），内置 VAD，运行时无需 Python。q8 模型约 254 MB，精度保持一致。[runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](https://github.com/QwenAudio/SenseVoice/releases) · [Hugging Face GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
 - 2026/05: FunASR 可将 SenseVoiceSmall 与独立的 FSMN-VAD、CAM++ 和标点模型组合，生成逐句说话人标签；说话人分离并非 SenseVoiceSmall checkpoint 的原生输出。需从源码安装 FunASR：`pip install git+https://github.com/modelscope/FunASR.git`
