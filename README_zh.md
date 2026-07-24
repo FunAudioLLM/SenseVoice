@@ -48,11 +48,11 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 - 2026/07：**FunASR 1.3.28 改善 SenseVoice 字幕对齐** — 实时会话会在 VAD 锁定后的最终解码发生退化时保留稳定文本，并在收到 `STOP` 后解码短尾语音，减少末尾字幕丢失或错位。安装命令：`pip install -U "funasr==1.3.28"`。[发布说明](https://github.com/modelscope/FunASR/releases/tag/v1.3.28) · [字幕指南](https://www.funasr.com/blog/funasr-v1-3-28-realtime-websocket-subtitles.html) · [PyPI](https://pypi.org/project/funasr/1.3.28/)
 - 2026/07：**FunASR 1.3.27 为 SenseVoice 增加检测语种元数据** — OpenAI 兼容接口现在会在 `verbose_json.language` 中返回检测到的 `zh`、`en`、`yue`、`ja` 或 `ko`。安装命令：`pip install -U "funasr==1.3.27"`。[发布说明](https://github.com/modelscope/FunASR/releases/tag/v1.3.27) · [接口指南](https://www.funasr.com/blog/funasr-v1-3-27-language-metadata-vllm-fallback.html) · [PyPI](https://pypi.org/project/funasr/1.3.27/)
-- 2026/06: **SenseVoice 支持 llama.cpp / GGUF**，可在 CPU/边缘端以单个自包含二进制运行（类似 whisper.cpp），内置 VAD，运行时无需 Python。q8 模型约 254 MB，精度保持一致。[runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](https://github.com/FunAudioLLM/SenseVoice/releases) · [Hugging Face GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
+- 2026/06: **SenseVoice 支持 llama.cpp / GGUF**，可在 CPU/边缘端以单个自包含二进制运行（类似 whisper.cpp），内置 VAD，运行时无需 Python。q8 模型约 254 MB，精度保持一致。[runtime/llama.cpp/](./runtime/llama.cpp/) · [Releases](https://github.com/QwenAudio/SenseVoice/releases) · [Hugging Face GGUF](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF)
 - 2026/05: FunASR 可将 SenseVoiceSmall 与独立的 FSMN-VAD、CAM++ 和标点模型组合，生成逐句说话人标签；说话人分离并非 SenseVoiceSmall checkpoint 的原生输出。需从源码安装 FunASR：`pip install git+https://github.com/modelscope/FunASR.git`
 - 2024/7：新增加导出 [ONNX](./demo_onnx.py) 与 [libtorch](./demo_libtorch.py) 功能，以及 python 版本 runtime：[funasr-onnx-0.4.0](https://pypi.org/project/funasr-onnx/)，[funasr-torch-0.1.1](https://pypi.org/project/funasr-torch/)
 - 2024/7: [SenseVoice-Small](https://www.modelscope.cn/models/iic/SenseVoiceSmall) 多语言音频理解模型开源，支持中、粤、英、日、韩语的多语言语音识别，情感识别和事件检测能力，具有极低的推理延迟。。
-- 2024/7: CosyVoice 致力于自然语音生成，支持多语言、音色和情感控制，擅长多语言语音生成、零样本语音生成、跨语言语音克隆以及遵循指令的能力。[CosyVoice repo](https://github.com/FunAudioLLM/CosyVoice) and [CosyVoice 在线体验](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
+- 2024/7: CosyVoice 致力于自然语音生成，支持多语言、音色和情感控制，擅长多语言语音生成、零样本语音生成、跨语言语音克隆以及遵循指令的能力。[CosyVoice repo](https://github.com/QwenAudio/CosyVoice) and [CosyVoice 在线体验](https://www.modelscope.cn/studios/iic/CosyVoice-300M).
 - 2024/7: [FunASR](https://github.com/modelscope/FunASR) 是一个基础语音识别工具包，提供多种功能，包括语音识别（ASR）、语音端点检测（VAD）、标点恢复、语言模型、说话人验证、说话人分离和多人对话语音识别等。
 
 <a name="Benchmarks"></a>
@@ -263,7 +263,7 @@ bash runtime/llama.cpp/download-funasr-model.sh sensevoice ./gguf
 llama-funasr-sensevoice -m ./gguf/sensevoice-small-f16.gguf --vad ./gguf/fsmn-vad.gguf -a audio.wav
 ```
 
-**预编译二进制：** [Releases](https://github.com/FunAudioLLM/SenseVoice/releases) · **下载与快速开始：** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF 模型：** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **文档与 benchmark：** [runtime/llama.cpp/](./runtime/llama.cpp/)
+**预编译二进制：** [Releases](https://github.com/QwenAudio/SenseVoice/releases) · **下载与快速开始：** [funasr.com/llama-cpp](https://www.funasr.com/llama-cpp.html) · **GGUF 模型：** [Hugging Face](https://huggingface.co/FunAudioLLM/SenseVoiceSmall-GGUF) · **文档与 benchmark：** [runtime/llama.cpp/](./runtime/llama.cpp/)
 
 ### 部署
 
