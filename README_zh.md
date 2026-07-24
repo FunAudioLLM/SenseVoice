@@ -10,7 +10,7 @@ SenseVoice 是具有音频理解能力的音频基础模型，包括语音识别
 
 <div align="center">  
 <h4>
-<a href="https://funaudiollm.github.io/"> Homepage </a>
+<a href="https://www.funasr.com/"> Homepage </a>
 ｜<a href="#最新动态"> 最新动态 </a>
 ｜<a href="#性能评测"> 性能评测 </a>
 ｜<a href="#环境安装"> 环境安装 </a>
