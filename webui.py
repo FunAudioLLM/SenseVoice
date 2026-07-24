@@ -223,9 +223,9 @@ html_content = """
     <h2 style="font-size: 22px;margin-left: 0px;">Usage</h2> <p style="font-size: 18px;margin-left: 20px;">Upload an audio file or input through a microphone, then select the task and language. the audio is transcribed into corresponding text along with associated emotions (😊 happy, 😡 angry/exicting, 😔 sad) and types of sound events (😀 laughter, 🎼 music, 👏 applause, 🤧 cough&sneeze, 😭 cry). The event labels are placed in the front of the text and the emotion are in the back of the text.</p>
 	<p style="font-size: 18px;margin-left: 20px;">Recommended audio input duration is below 30 seconds. For audio longer than 30 seconds, local deployment is recommended.</p>
 	<h2 style="font-size: 22px;margin-left: 0px;">Repo</h2>
-	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/FunAudioLLM/SenseVoice" target="_blank">SenseVoice</a>: multilingual speech understanding model</p>
+	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/QwenAudio/SenseVoice" target="_blank">SenseVoice</a>: multilingual speech understanding model</p>
 	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/modelscope/FunASR" target="_blank">FunASR</a>: fundamental speech recognition toolkit</p>
-	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/FunAudioLLM/CosyVoice" target="_blank">CosyVoice</a>: high-quality multilingual TTS model</p>
+	<p style="font-size: 18px;margin-left: 20px;"><a href="https://github.com/QwenAudio/CosyVoice" target="_blank">CosyVoice</a>: high-quality multilingual TTS model</p>
 </div>
 """
 

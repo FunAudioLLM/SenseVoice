@@ -61,8 +61,8 @@ fastapi run --port 50000
 
 ### Reporting Bugs
 
-1. Search [existing issues](https://github.com/FunAudioLLM/SenseVoice/issues) to avoid duplicates.
-2. Use the [Bug Report template](https://github.com/FunAudioLLM/SenseVoice/issues/new?template=bug_report.md).
+1. Search [existing issues](https://github.com/QwenAudio/SenseVoice/issues) to avoid duplicates.
+2. Use the [Bug Report template](https://github.com/QwenAudio/SenseVoice/issues/new?template=bug_report.md).
 3. Include your environment details (OS, Python version, PyTorch version, GPU, CUDA version).
 4. Provide a minimal code sample to reproduce the issue.
 
@@ -78,13 +78,13 @@ git checkout -b your-branch-name
 
 3. **Test your changes** to make sure nothing is broken.
 
-4. **Push to your fork** and open a Pull Request against `FunAudioLLM/SenseVoice:main`.
+4. **Push to your fork** and open a Pull Request against `QwenAudio/SenseVoice:main`.
 
 5. **Describe your changes** clearly in the PR description. Explain *what* changed and *why*.
 
 ### Types of Contributions We Welcome
 
-- **Bug fixes** — Check [open issues labeled `bug`](https://github.com/FunAudioLLM/SenseVoice/issues?q=is%3Aissue+is%3Aopen+label%3Abug) for known problems.
+- **Bug fixes** — Check [open issues labeled `bug`](https://github.com/QwenAudio/SenseVoice/issues?q=is%3Aissue+is%3Aopen+label%3Abug) for known problems.
 - **Documentation improvements** — Typo fixes, clarifications, additional examples, translations.
 - **New examples** — Demo scripts showing different use cases (emotion detection, event detection, multilingual transcription).
 - **Performance improvements** — Optimizations for inference speed or memory usage.
@@ -144,7 +144,7 @@ docker run -e SENSEVOICE_DEVICE=cpu -p 50000:50000 sensevoice
 
 ## Questions?
 
-- Open an issue using the [Questions template](https://github.com/FunAudioLLM/SenseVoice/issues/new?template=ask_questions.md).
+- Open an issue using the [Questions template](https://github.com/QwenAudio/SenseVoice/issues/new?template=ask_questions.md).
 - Join the community via the DingTalk group (see [README](./README.md#community)).
 
 ## License
